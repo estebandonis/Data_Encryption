@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Base64;
 
 public class Main {
 
@@ -28,6 +29,9 @@ public class Main {
      * Convert the given ascii text to binary
      * @param asciiString String
      * @return Binary string
+     * @see #numberToBinary(int)
+     *
+     * @implNote Reference: <a href="https://docs.vultr.com/java/examples/find-ascii-value-of-a-character">...</a>
      */
     public static String asciiToBinary(String asciiString) {
         // Variable to store the resulted binary sequence
@@ -39,6 +43,7 @@ public class Main {
             char charValue = asciiString.charAt(i);
             // We cast the character to its ascii numeric value
             byte byteValue = (byte) charValue;
+            System.out.println("Ascii value: " + byteValue);
 
             // We convert the ascii numeric value to binary
             String binaryValue = numberToBinary(byteValue);
@@ -49,8 +54,44 @@ public class Main {
         return binaryString.toString();
     }
 
-    public static String base64ToBinary(){
-        return null;
+    /***
+     * Get the base64 numeric value of a given character
+     * @param base64Char char
+     * @return Base64 value
+     *
+     * @implNote Reference: AI prompt used
+     */
+    private static int getBase64Value(char base64Char) {
+        // Base64 characters
+        String base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        // We return the index of the given character in the base64 characters
+        return base64Chars.indexOf(base64Char);
+    }
+
+    /***
+     * Convert the given base64 string to binary
+     * @param base64String String
+     * @return Binary string
+     * @see #getBase64Value(char)
+     * @see #numberToBinary(int)
+     */
+    public static String base64ToBinary(String base64String) {
+        // Variable to store the resulted binary sequence
+        StringBuilder binaryString = new StringBuilder();
+
+        // We loop through ever character in the given string
+        for (int i = 0; i < base64String.length(); i++) {
+            // We extract the character at the given index
+            char charValue = base64String.charAt(i);
+            // We get the numeric value of the base64 character
+            int numericValue = getBase64Value(charValue);
+            // We convert the numeric value to binary
+            String binaryValue = numberToBinary(numericValue);
+            // We append the binary value to the binary string
+            binaryString.append(binaryValue);
+        }
+        // We return the resulted binary string
+        return binaryString.toString();
     }
 
     public static String binaryToBase64(){
@@ -142,10 +183,6 @@ public class Main {
 
         System.out.print("Enter text value: ");
         String text = scanner.nextLine();
-
-        String value = asciiToBinary(text);
-
-        System.out.println("Binary value: " + value);
 
         String encryptedMessage = encrypt(text, key);
         System.out.println("Encrypted Message: " + encryptedMessage);
