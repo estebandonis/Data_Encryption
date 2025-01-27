@@ -50,4 +50,30 @@ public class BinaryFunctions {
         // We return the resulted number value
         return numberValue;
     }
+
+    /***
+     * Apply XOR operation between two binary strings
+     * @param binaryString
+     * @return Ascii string
+     */
+    public static String xorBinary(String binaryStringOne, String binaryStringTwo) {
+        StringBuilder xorString = new StringBuilder();
+
+        if (binaryStringOne.length() != binaryStringTwo.length()) {
+            return null;
+        }
+
+        for (int i = 0; i < binaryStringOne.length(); i++) {
+            char firstString = binaryStringOne.charAt(i);
+            char secondString = binaryStringTwo.charAt(i);
+
+            if (firstString == secondString) {
+                xorString.append("0");
+            } else {
+                xorString.append("1");
+            }
+        }
+
+        return xorString.toString();
+    }
 }

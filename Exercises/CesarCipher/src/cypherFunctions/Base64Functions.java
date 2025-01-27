@@ -85,7 +85,6 @@ public class Base64Functions {
      * @return Base64 string
      */
     public static String base64ToAscii(String base64Text) {
-        System.out.println("Base64 Text: " + base64Text);
         // We transform base64 string into binary
         String base64ToBinary = base64ToBinary(base64Text);
         // We return transformation of binary to ascii

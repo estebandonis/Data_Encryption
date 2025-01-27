@@ -89,11 +89,14 @@ public class Main {
         String base64ToBinary = Base64Functions.binaryToBase64(binaryBase64);
         System.out.println("Binary to Base64: " + base64ToBinary);
 
-
         String binaryAscii = AsciiFunctions.asciiToBinary(text);
         System.out.println("Ascii to Binary: " + binaryAscii);
 
         String asciiBinary = AsciiFunctions.binaryToAscii(binaryAscii);
         System.out.println("Binary to Ascii: " + asciiBinary);
+
+
+        String binaryxor = BinaryFunctions.xorBinary("1010", "1100");
+        System.out.println("XOR Binary: " + binaryxor);
     }
 }
