@@ -19,9 +19,12 @@ public class AsciiFunctions {
             char charValue = asciiString.charAt(i);
             // We cast the character to its ascii numeric value
             byte byteValue = (byte) charValue;
-
             // We convert the ascii numeric value to binary
             String binaryValue = BinaryFunctions.numberToBinary(byteValue);
+            // If the binary value is less than 8 characters, we add 0s to the left
+            if (binaryValue.length() < 8) {
+                binaryValue = "0".repeat(8 - binaryValue.length()) + binaryValue;
+            }
             // We append the binary value to the binary string
             binaryString.append(binaryValue);
         }

@@ -17,11 +17,6 @@ public class BinaryFunctions {
             // We divide the number by 2
             number = number / 2;
         }
-        // If the binary string is less than 8 characters, we add 0s to the left
-        if (binaryString.length() < 8) {
-            // We add the difference of the string length and 8 with 0s
-            binaryString.append("0".repeat(8 - binaryString.length()));
-        }
         // We return the binary string, but we reverse it to get the correct binary sequence
         return binaryString.reverse().toString();
     }
@@ -51,29 +46,69 @@ public class BinaryFunctions {
         return numberValue;
     }
 
-    /***
-     * Apply XOR operation between two binary strings
-     * @param binaryString
-     * @return Ascii string
-     */
-    public static String xorBinary(String binaryStringOne, String binaryStringTwo) {
-        StringBuilder xorString = new StringBuilder();
+    public static String fillString(String input, int targetLength) {
+        StringBuilder filledString = new StringBuilder(input);
 
-        if (binaryStringOne.length() != binaryStringTwo.length()) {
-            return null;
-        }
-
-        for (int i = 0; i < binaryStringOne.length(); i++) {
-            char firstString = binaryStringOne.charAt(i);
-            char secondString = binaryStringTwo.charAt(i);
-
-            if (firstString == secondString) {
-                xorString.append("0");
-            } else {
-                xorString.append("1");
+        while (filledString.length() < targetLength) {
+            for (int i = 0; i < input.length() && filledString.length() < targetLength; i++) {
+                filledString.append(input.charAt(i));
             }
         }
 
+        return filledString.toString();
+    }
+
+    public static String[] binaryLengthCheck(String binaryStringOne, String binaryStringTwo) {
+        int stringOneLength = binaryStringOne.length();
+        int stringTwoLength = binaryStringTwo.length();
+
+        // We check if the binary strings have the same length
+        if (stringOneLength != stringTwoLength) {
+            if (stringOneLength < stringTwoLength) {
+                // If the case, we add 0s to the left of the first string
+                binaryStringTwo = binaryStringTwo.substring(0, stringOneLength);
+            } else {
+                // If not, we add 0s to the left of the second string
+                binaryStringTwo = fillString(binaryStringTwo, stringOneLength);
+            }
+        }
+
+        return new String[]{binaryStringOne, binaryStringTwo};
+    }
+
+    /***
+     * Apply XOR operation between two binary strings
+     * @param binaryStringOne First binary String
+     * @param binaryStringTwo Second binary String
+     *
+     * @return Ascii string
+     */
+    public static String xorBinary(String binaryStringOne, String binaryStringTwo) {
+        // Variable to store the resulted xor string
+        StringBuilder xorString = new StringBuilder();
+
+        // We check if the binary strings have the same length
+        if (binaryStringOne.length() != binaryStringTwo.length()) {
+            // If not, we return null
+            return null;
+        }
+
+        // We loop through every character in the binary strings
+        for (int i = 0; i < binaryStringOne.length(); i++) {
+            // We obtained the binary character in the index for both strings
+            char firstString = binaryStringOne.charAt(i);
+            char secondString = binaryStringTwo.charAt(i);
+
+            // We check if the characters are the same
+            if (firstString == secondString) {
+                // If the case, we add 0 to the xor string
+                xorString.append("0");
+            } else {
+                // If not, we add 1 to the xor string
+                xorString.append("1");
+            }
+        }
+        // We return the resulted xor string
         return xorString.toString();
     }
 }

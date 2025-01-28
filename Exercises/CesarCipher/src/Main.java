@@ -77,26 +77,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter text value: ");
+        System.out.print("Enter the text to encrypt: ");
         String text = scanner.nextLine();
 
-        String asciiBase64 = Base64Functions.base64ToAscii(text);
-        System.out.println("Base64 to Ascii: " + asciiBase64);
-
-        String binaryBase64 = Base64Functions.base64ToBinary(text);
-        System.out.println("Base64 to Binary: " + binaryBase64);
-
-        String base64ToBinary = Base64Functions.binaryToBase64(binaryBase64);
-        System.out.println("Binary to Base64: " + base64ToBinary);
-
-        String binaryAscii = AsciiFunctions.asciiToBinary(text);
-        System.out.println("Ascii to Binary: " + binaryAscii);
-
-        String asciiBinary = AsciiFunctions.binaryToAscii(binaryAscii);
-        System.out.println("Binary to Ascii: " + asciiBinary);
-
-
-        String binaryxor = BinaryFunctions.xorBinary("1010", "1100");
-        System.out.println("XOR Binary: " + binaryxor);
+        String result = KeyFunctions.generateCipherFixed(text);
+        System.out.println("Encrypted text: " + result);
     }
 }

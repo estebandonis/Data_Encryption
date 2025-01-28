@@ -47,6 +47,10 @@ public class Base64Functions {
             int numericValue = getBase64Value(charValue);
             // We convert the numeric value to binary
             String binaryValue = BinaryFunctions.numberToBinary(numericValue);
+            // If the binary value is less than 6 characters, we add 0s to the left
+            if (binaryValue.length() < 6) {
+                binaryValue = "0".repeat(6 - binaryValue.length()) + binaryValue;
+            }
             // We append the binary value to the binary string
             binaryString.append(binaryValue);
         }
@@ -65,9 +69,9 @@ public class Base64Functions {
         StringBuilder base64String = new StringBuilder();
 
         // We loop through every 8 characters in the given binary string
-        for (int i = 0; i < binaryString.length(); i += 8) {
+        for (int i = 0; i < binaryString.length(); i += 6) {
             // We extract the 8 characters from the binary string
-            String binaryValue = binaryString.substring(i, Math.min(binaryString.length(), i + 8));
+            String binaryValue = binaryString.substring(i, Math.min(binaryString.length(), i + 6));
             // We convert the binary string to a character number in base64 encoding
             int numberValue = BinaryFunctions.binaryToNumber(binaryValue);
             // We get the base64 character of the resulted base64 number
@@ -85,8 +89,19 @@ public class Base64Functions {
      * @return Base64 string
      */
     public static String base64ToAscii(String base64Text) {
+        if (base64Text.contains("=")) {
+            base64Text = base64Text.substring(0, base64Text.indexOf("="));
+        }
+
         // We transform base64 string into binary
         String base64ToBinary = base64ToBinary(base64Text);
+
+        int padding = base64ToBinary.length() % 8;
+
+        if (padding > 0) {
+            base64ToBinary = base64ToBinary.substring(0, base64ToBinary.length() - padding);
+        }
+
         // We return transformation of binary to ascii
         return AsciiFunctions.binaryToAscii(base64ToBinary);
     }
