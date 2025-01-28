@@ -1,7 +1,9 @@
 package cypherFunctions;
 
+/***
+ * Class to handle ascii functions
+ */
 public class AsciiFunctions {
-
     /***
      * Convert the given ascii text to binary
      * @param asciiString String

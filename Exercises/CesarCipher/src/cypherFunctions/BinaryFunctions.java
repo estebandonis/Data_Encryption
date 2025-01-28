@@ -1,5 +1,8 @@
 package cypherFunctions;
 
+/***
+ * Class to handle binary functions
+ */
 public class BinaryFunctions {
     /***
      * Convert the given number to binary
@@ -24,7 +27,7 @@ public class BinaryFunctions {
     /***
      * Convert the given binary string to a number
      * @param binaryString String
-     * @return Number value
+     * @return int
      */
     public static int binaryToNumber(String binaryString) {
         // We reverse the binary string to get the correct sequence
@@ -46,19 +49,37 @@ public class BinaryFunctions {
         return numberValue;
     }
 
+    /***
+     * Fill the given string with the same characters until it reaches the target length
+     * @param input String
+     * @param targetLength int
+     * @return String
+     */
     public static String fillString(String input, int targetLength) {
+        // Variable to store the filled string
         StringBuilder filledString = new StringBuilder(input);
 
+        // We loop through the input string until it reaches the target length
         while (filledString.length() < targetLength) {
+            // We add the characters from the input string
             for (int i = 0; i < input.length() && filledString.length() < targetLength; i++) {
                 filledString.append(input.charAt(i));
             }
         }
 
+        // We return the filled string
         return filledString.toString();
     }
 
+    /***
+     * Check if the binary strings have the same length
+     * @param binaryStringOne String
+     * @param binaryStringTwo String
+     *
+     * @return String[]
+     */
     public static String[] binaryLengthCheck(String binaryStringOne, String binaryStringTwo) {
+        // We get the length of the binary strings
         int stringOneLength = binaryStringOne.length();
         int stringTwoLength = binaryStringTwo.length();
 
@@ -73,6 +94,7 @@ public class BinaryFunctions {
             }
         }
 
+        // We return the binary strings with the same lengths
         return new String[]{binaryStringOne, binaryStringTwo};
     }
 

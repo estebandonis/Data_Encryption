@@ -1,5 +1,8 @@
 package cypherFunctions;
 
+/***
+ * Class to handle base64 functions
+ */
 public class Base64Functions {
     private static final String base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
