@@ -1,7 +1,7 @@
 package cyphers;
 
 public class CesarCipher {
-    private static final String original = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String original = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
 
     /***
      * Encrypt the text using the amount of shifts made in the alphabet

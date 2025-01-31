@@ -37,26 +37,19 @@ public class KeyFunctions {
     /***
      * Function to generate a fixed length cipher based on the user key
      * @param userText String
-     * @param asciiEncoding boolean
+     * @param key String
      *
      * @return Cipher string
      */
-    public static String generateCipherFixed(String userText, boolean asciiEncoding){
-        // We check if the user text is in ASCII encoding
-        if (!asciiEncoding) {
-            // If not the case, we convert the user text to ASCII
-            userText = Base64Functions.base64ToAscii(userText);
-        }
+    public static String[] generateCipherFixed(String userText, String key) {
         // We convert the user text to binary
         String binaryUserText = AsciiFunctions.asciiToBinary(userText);
 
-        // We generate a random key of fixed size
-        String key = generateKey(16);
         // We convert the generated key to binary
         String binaryGeneratedKey = AsciiFunctions.asciiToBinary(key);
 
         // We check if the binary strings have the same length
-        String[] binaries = BinaryFunctions.binaryLengthCheck(binaryUserText, binaryGeneratedKey);
+        String[] binaries = BinaryFunctions.binaryLengthFixed(binaryUserText, binaryGeneratedKey);
         // Assign the binary strings back
         binaryUserText = binaries[0];
         binaryGeneratedKey = binaries[1];
@@ -64,34 +57,17 @@ public class KeyFunctions {
         // We encrypt the binary string by doing a XOR operation
         String binaryCipher = BinaryFunctions.xorBinary(binaryUserText, binaryGeneratedKey);
         assert binaryCipher != null;
-        return binaryCipher;
-    }
-
-    /***
-     * Override Function of generateCipherFixed
-     * @param userText String
-     * @see #generateCipherFixed(String, boolean)
-     *
-     * @return Cipher string
-     */
-    public static String generateCipherFixed(String userText){
-        return generateCipherFixed(userText, true);
+        return new String[]{binaryCipher, binaryGeneratedKey};
     }
 
     /***
      * Function to generate a dynamic length cipher based on the user key
      * @param userText String
-     * @param asciiEncoding boolean
      * @param number int
      *
      * @return String
      */
-    public static String generateCipherDynamic(String userText, boolean asciiEncoding, int number){
-        // We check if the user text is in ASCII encoding
-        if (!asciiEncoding) {
-            // If not the case, we convert the user text to ASCII
-            userText = Base64Functions.base64ToAscii(userText);
-        }
+    public static String[] generateCipherDynamic(String userText, int number){
         // We convert the user text to binary
         String binaryUserText = AsciiFunctions.asciiToBinary(userText);
 
@@ -101,7 +77,7 @@ public class KeyFunctions {
         String binaryGeneratedKey = AsciiFunctions.asciiToBinary(key);
 
         // We check if the binary strings have the same length
-        String[] binaries = BinaryFunctions.binaryLengthCheck(binaryUserText, binaryGeneratedKey);
+        String[] binaries = BinaryFunctions.binaryLengthDynamic(binaryUserText, binaryGeneratedKey);
         // Assign the binary strings back to the variables
         binaryUserText = binaries[0];
         binaryGeneratedKey = binaries[1];
@@ -110,18 +86,6 @@ public class KeyFunctions {
         String binaryCipher = BinaryFunctions.xorBinary(binaryUserText, binaryGeneratedKey);
         assert binaryCipher != null;
         // We return the resulted cipher
-        return binaryCipher;
-    }
-
-    /***
-     * Override Function of generateCipherDynamic
-     * @param userText String
-     * @param number int
-     * @see #generateCipherDynamic(String, boolean, int)
-     *
-     * @return String
-     */
-    public static String generateCipherDynamic(String userText, int number){
-        return generateCipherDynamic(userText, true, number);
+        return new String[]{binaryCipher, binaryGeneratedKey};
     }
 }

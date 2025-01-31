@@ -78,7 +78,7 @@ public class BinaryFunctions {
      *
      * @return String[]
      */
-    public static String[] binaryLengthCheck(String binaryStringOne, String binaryStringTwo) {
+    public static String[] binaryLengthFixed(String binaryStringOne, String binaryStringTwo) {
         // We get the length of the binary strings
         int stringOneLength = binaryStringOne.length();
         int stringTwoLength = binaryStringTwo.length();
@@ -88,6 +88,33 @@ public class BinaryFunctions {
             if (stringOneLength < stringTwoLength) {
                 // If the case, we add 0s to the left of the first string
                 binaryStringTwo = binaryStringTwo.substring(0, stringOneLength);
+            } else {
+                // If not, we add 0s to the left of the second string
+                binaryStringTwo = fillString(binaryStringTwo, stringOneLength);
+            }
+        }
+
+        // We return the binary strings with the same lengths
+        return new String[]{binaryStringOne, binaryStringTwo};
+    }
+
+    /***
+     * Check if the binary strings have the same length
+     * @param binaryStringOne String
+     * @param binaryStringTwo String
+     *
+     * @return String[]
+     */
+    public static String[] binaryLengthDynamic(String binaryStringOne, String binaryStringTwo) {
+        // We get the length of the binary strings
+        int stringOneLength = binaryStringOne.length();
+        int stringTwoLength = binaryStringTwo.length();
+
+        // We check if the binary strings have the same length
+        if (stringOneLength != stringTwoLength) {
+            if (stringOneLength < stringTwoLength) {
+                // If the case, we add 0s to the left of the first string
+                binaryStringOne = "0".repeat(stringTwoLength - stringOneLength);
             } else {
                 // If not, we add 0s to the left of the second string
                 binaryStringTwo = fillString(binaryStringTwo, stringOneLength);
