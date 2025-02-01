@@ -144,7 +144,7 @@ public class Main {
         System.out.println("Decrypted Text: " + decryptedText);
     }
 
-    private static void afinTests() {
+    private static void affineTests() {
         System.out.print("Enter the text to encrypt: ");
         String textToEncrypt = scanner.nextLine();
         System.out.print("Enter the multiplicative key to encrypt: ");
@@ -156,10 +156,10 @@ public class Main {
         System.out.println("Multiplicative Key: " + multiplicativeKey);
         System.out.println("Additive Key: " + additiveKey);
 
-        String encryptedText = AfinCipher.encrypt(textToEncrypt, multiplicativeKey, additiveKey);
+        String encryptedText = AffineCipher.encrypt(textToEncrypt, multiplicativeKey, additiveKey);
         System.out.println("Encrypted Text: " + encryptedText);
 
-        String decryptedText = AfinCipher.decrypt(encryptedText, multiplicativeKey, additiveKey);
+        String decryptedText = AffineCipher.decrypt(encryptedText, multiplicativeKey, additiveKey);
         System.out.println("Decrypted Text: " + decryptedText);
     }
 
@@ -188,7 +188,7 @@ public class Main {
 
 //        cesarTests();
 
-//        afinTests();
+//        affineTests();
 
         vigenereTests();
     }
