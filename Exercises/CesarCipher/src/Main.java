@@ -3,6 +3,7 @@ import cypherFunctions.*;
 import cyphers.*;
 
 public class Main {
+    private static final Scanner scanner = new Scanner(System.in);
 
     /***
      * Method to run the first exercise tests
@@ -127,7 +128,12 @@ public class Main {
         System.out.println("Ascii Text: " + cipherText);
     }
 
-    private static void cesarTests(String textToEncrypt, byte key) {
+    private static void cesarTests() {
+        System.out.print("Enter the text to encrypt: ");
+        String textToEncrypt = scanner.nextLine();
+        System.out.print("Enter the key to encrypt: ");
+        byte key = scanner.nextByte();
+
         System.out.println("Text: " + textToEncrypt);
         System.out.println("Key: " + key);
 
@@ -138,20 +144,34 @@ public class Main {
         System.out.println("Decrypted Text: " + decryptedText);
     }
 
+    private static void afinTests() {
+        System.out.print("Enter the text to encrypt: ");
+        String textToEncrypt = scanner.nextLine();
+        System.out.print("Enter the multiplicative key to encrypt: ");
+        byte multiplicativeKey = scanner.nextByte();
+        System.out.print("Enter the additive key to encrypt: ");
+        byte additiveKey = scanner.nextByte();
+
+        System.out.println("Text: " + textToEncrypt);
+        System.out.println("Multiplicative Key: " + multiplicativeKey);
+        System.out.println("Additive Key: " + additiveKey);
+
+        String encryptedText = AfinCipher.encrypt(textToEncrypt, multiplicativeKey, additiveKey);
+        System.out.println("Encrypted Text: " + encryptedText);
+
+        String decryptedText = AfinCipher.decrypt(encryptedText, multiplicativeKey, additiveKey);
+        System.out.println("Decrypted Text: " + decryptedText);
+    }
+
     /***
      * Main method to run the program
      * @param args String[]
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
 //        firstExerciseTests();
 
-        System.out.print("Enter the text to encrypt: ");
-        String textToCipher = scanner.nextLine();
-        System.out.print("Enter the key to encrypt: ");
-        byte key = scanner.nextByte();
+//        cesarTests();
 
-        cesarTests(textToCipher, key);
+//        afinTests();
     }
 }
