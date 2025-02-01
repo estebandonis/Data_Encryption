@@ -3,11 +3,11 @@ import cypherFunctions.*;
 import cyphers.*;
 
 public class Main {
+
     /***
-     * Main method to run the program
-     * @param args String[]
+     * Method to run the first exercise tests
      */
-    public static void main(String[] args) {
+    private static void firstExerciseTests() {
         String asciiText = "hola";
         System.out.println("Ascii Text: " + asciiText);
 
@@ -125,5 +125,33 @@ public class Main {
         assert xorOper != null;
         cipherText = AsciiFunctions.binaryToAscii(xorOper);
         System.out.println("Ascii Text: " + cipherText);
+    }
+
+    private static void cesarTests(String textToEncrypt, byte key) {
+        System.out.println("Text: " + textToEncrypt);
+        System.out.println("Key: " + key);
+
+        String encryptedText = CesarCipher.encrypt(textToEncrypt, key);
+        System.out.println("Encrypted Text: " + encryptedText);
+
+        String decryptedText = CesarCipher.decrypt(encryptedText, key);
+        System.out.println("Decrypted Text: " + decryptedText);
+    }
+
+    /***
+     * Main method to run the program
+     * @param args String[]
+     */
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+//        firstExerciseTests();
+
+        System.out.print("Enter the text to encrypt: ");
+        String textToCipher = scanner.nextLine();
+        System.out.print("Enter the key to encrypt: ");
+        byte key = scanner.nextByte();
+
+        cesarTests(textToCipher, key);
     }
 }

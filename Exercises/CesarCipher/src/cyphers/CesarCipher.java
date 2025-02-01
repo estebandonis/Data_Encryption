@@ -1,7 +1,7 @@
 package cyphers;
 
 public class CesarCipher {
-    private static final String original = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+    private static final String original = "abcdefghijklmnñopqrstuvwxyz";
 
     /***
      * Encrypt the text using the amount of shifts made in the alphabet
@@ -12,6 +12,8 @@ public class CesarCipher {
     public static String encrypt(String text, byte key) {
         // Encrypted message variable to store the result
         StringBuilder encryptedMessage = new StringBuilder();
+
+        text = text.toLowerCase();
 
         // Loop to iterate over every character in the given text
         for (int i = 0; i < text.length(); i++) {
@@ -46,6 +48,8 @@ public class CesarCipher {
         // Decrypted message variable to store the resulted text
         StringBuilder decryptedMessage = new StringBuilder();
 
+        text = text.toLowerCase();
+
         // We loop through every character of the given text
         for (int i = 0; i < text.length(); i++) {
             // We extract the character of the given index
@@ -55,7 +59,7 @@ public class CesarCipher {
                 // If the case, we get the index of the selected character in the original variable
                 int charPosition = original.indexOf(stringCharacter);
                 // We calculate the new position using the reverse cesar cipher formula taking the amount of shifts made during encryption
-                int keyVal = (charPosition - key) % original.length();
+                int keyVal = ((charPosition - key) % original.length() + original.length()) % original.length();
                 // When we get the new character, we append it to the decrypted message
                 char replaceVal = original.charAt(keyVal);
                 decryptedMessage.append(replaceVal);
