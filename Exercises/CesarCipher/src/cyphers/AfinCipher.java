@@ -1,7 +1,7 @@
 package cyphers;
 
 public class AfinCipher {
-    private static final String original = "abcdefghijklmnopqrstuvwxyz";
+    private static final String ALPHABET = "abcdefghijklmnñopqrstuvwxyz";
 
     // Function to find the modular inverse of a under modulo m
     public static int modInverse(int a, int m) {
@@ -45,9 +45,9 @@ public class AfinCipher {
             char stringCharacter = text.charAt(i);
 
             if (Character.isLetter(stringCharacter)) {
-                int charPosition = original.indexOf(stringCharacter);
-                int newKey = (multiplicativeKey * charPosition + additiveKey) % original.length();
-                char replaceVal = original.charAt(newKey);
+                int charPosition = ALPHABET.indexOf(stringCharacter);
+                int newKey = (multiplicativeKey * charPosition + additiveKey) % ALPHABET.length();
+                char replaceVal = ALPHABET.charAt(newKey);
                 encryptedMessage.append(replaceVal);
             } else {
                 encryptedMessage.append(stringCharacter);
@@ -65,13 +65,13 @@ public class AfinCipher {
             char stringCharacter = text.charAt(i);
 
             if (Character.isLetter(stringCharacter)) {
-                int charPosition = original.indexOf(stringCharacter);
+                int charPosition = ALPHABET.indexOf(stringCharacter);
                 System.out.println("charPosition: " + charPosition);
-                int inverseA = modInverse(multiplicativeKey, original.length());
+                int inverseA = modInverse(multiplicativeKey, ALPHABET.length());
                 System.out.println("inverseA: " + inverseA);
-                int newKey = ((modInverse(multiplicativeKey, original.length()) * ((charPosition - additiveKey) % original.length())) % original.length() + original.length()) % original.length();
+                int newKey = ((modInverse(multiplicativeKey, ALPHABET.length()) * ((charPosition - additiveKey) % ALPHABET.length())) % ALPHABET.length() + ALPHABET.length()) % ALPHABET.length();
                 System.out.println("newKey: " + newKey);
-                char replaceVal = original.charAt(newKey);
+                char replaceVal = ALPHABET.charAt(newKey);
                 System.out.println("replaceVal: " + replaceVal + "\n");
                 decryptedMessage.append(replaceVal);
             } else {

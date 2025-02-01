@@ -163,6 +163,22 @@ public class Main {
         System.out.println("Decrypted Text: " + decryptedText);
     }
 
+    private static void vigenereTests() {
+        System.out.print("Enter the text to encrypt: ");
+        String textToEncrypt = scanner.nextLine();
+        System.out.print("Enter the key to encrypt: ");
+        String keyWord = scanner.nextLine();
+
+        System.out.println("Text: " + textToEncrypt);
+        System.out.println("Key word: " + keyWord);
+
+        String encryptedText = VigenereCipher.encrypt(textToEncrypt, keyWord);
+        System.out.println("Encrypted Text: " + encryptedText);
+
+        String decryptedText = VigenereCipher.decrypt(encryptedText, keyWord);
+        System.out.println("Decrypted Text: " + decryptedText);
+    }
+
     /***
      * Main method to run the program
      * @param args String[]
@@ -173,5 +189,7 @@ public class Main {
 //        cesarTests();
 
 //        afinTests();
+
+        vigenereTests();
     }
 }
