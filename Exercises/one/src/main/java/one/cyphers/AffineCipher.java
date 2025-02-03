@@ -1,4 +1,4 @@
-package cyphers;
+package one.cyphers;
 
 public class AffineCipher {
     /***

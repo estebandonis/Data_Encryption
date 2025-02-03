@@ -1,4 +1,4 @@
-package cypherFunctions;
+package one.cypherFunctions;
 
 /***
  * Class to handle ascii functions

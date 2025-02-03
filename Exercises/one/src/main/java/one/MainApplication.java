@@ -1,8 +1,26 @@
-import java.util.Scanner;
-import cypherFunctions.*;
-import cyphers.*;
+package one;
 
-public class Main {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import one.cypherFunctions.AsciiFunctions;
+import one.cypherFunctions.Base64Functions;
+import one.cypherFunctions.BinaryFunctions;
+import one.cypherFunctions.KeyFunctions;
+import one.cyphers.AffineCipher;
+import one.cyphers.CesarCipher;
+import one.cyphers.Probability;
+import one.cyphers.VigenereCipher;
+
+import java.io.IOException;
+import java.util.*;
+
+public class MainApplication extends Application {
     private static final Scanner scanner = new Scanner(System.in);
 
     /***
@@ -179,17 +197,51 @@ public class Main {
         System.out.println("Decrypted Text: " + decryptedText);
     }
 
-    /***
-     * Main method to run the program
-     * @param args String[]
-     */
+    private static Map<Character, Float> probabilityTests() {
+        String text = "holaaaa";
+        System.out.println("Text: " + text);
+
+        Map<Character, Float> frequencyMap = Probability.getFrequencyMap(text);
+
+        return frequencyMap;
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        stage.setTitle("Characters Frequency");
+
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Character");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Frequency");
+
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+
+        XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
+
+        dataSeries.setName("Frequencies");
+
+        Map<Character, Float> frequencyMap = probabilityTests();
+
+        for (Map.Entry<Character, Float> entry : frequencyMap.entrySet()) {
+            dataSeries.getData().add(new XYChart.Data<String, Number>(entry.getKey().toString(), entry.getValue()));
+        }
+
+        barChart.getData().add(dataSeries);
+
+        VBox vbox = new VBox(barChart);
+
+        Scene scene = new Scene(vbox, 800, 600);
+
+        stage.setScene(scene);
+        stage.setHeight(600);
+        stage.setWidth(800);
+
+        stage.show();
+    }
+
     public static void main(String[] args) {
-//        firstExerciseTests();
-
-//        cesarTests();
-
-//        affineTests();
-
-        vigenereTests();
+        launch();
     }
 }

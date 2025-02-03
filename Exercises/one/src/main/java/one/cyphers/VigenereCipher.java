@@ -1,6 +1,6 @@
-package cyphers;
+package one.cyphers;
 
-import cypherFunctions.BinaryFunctions;
+import one.cypherFunctions.BinaryFunctions;
 
 import java.util.HashMap;
 import java.util.Map;
