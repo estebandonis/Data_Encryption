@@ -196,10 +196,23 @@ public class MainApplication extends Application {
     }
 
     private static Map<Character, Float> probabilityTests() {
-        String text = "holaaaa";
-        System.out.println("Text: " + text);
+        System.out.print("Type a word: " );
+        String text = scanner.nextLine();
+        Map<Character, Float> textFrequencies = Probability.getFrequencyMap(text);
 
-        return Probability.getFrequencyMap(text);
+        compareFrequencies(textFrequencies);
+
+        return textFrequencies;
+    }
+
+    private static void compareFrequencies(Map<Character, Float> textFrequencies) {
+        Map<Character, Float> alphabetFrequencies = Probability.getAlphabetFrequencyMap();
+
+        System.out.println("char = " + "alphabet value" + " -> " + "text value");
+
+        for (Map.Entry<Character, Float> entry : alphabetFrequencies.entrySet()) {
+            System.out.println(entry.getKey() + "\t = \t" + entry.getValue() + "\t\t -> \t" + textFrequencies.get(entry.getKey()));
+        }
     }
 
     @Override
@@ -216,7 +229,7 @@ public class MainApplication extends Application {
 
         XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
 
-        dataSeries.setName("Frequencies");
+        dataSeries.setName("Frequencies Text");
 
         Map<Character, Float> frequencyMap = probabilityTests();
 
@@ -226,7 +239,28 @@ public class MainApplication extends Application {
 
         barChart.getData().add(dataSeries);
 
-        VBox vbox = new VBox(barChart);
+
+        CategoryAxis xAxisA = new CategoryAxis();
+        xAxis.setLabel("Character");
+
+        NumberAxis yAxisA = new NumberAxis();
+        yAxis.setLabel("Frequency");
+
+        BarChart<String, Number> barChartAlphabet = new BarChart<>(xAxisA, yAxisA);
+
+        XYChart.Series<String, Number> dataSeriesAlphabet = new XYChart.Series<>();
+
+        dataSeriesAlphabet.setName("Frequencies Alphabet");
+
+        Map<Character, Float> alphabetFrequencies = Probability.getAlphabetFrequencyMap();
+
+        for (Map.Entry<Character, Float> entry : alphabetFrequencies.entrySet()) {
+            dataSeriesAlphabet.getData().add(new XYChart.Data<String, Number>(entry.getKey().toString(), entry.getValue()));
+        }
+
+        barChartAlphabet.getData().add(dataSeriesAlphabet);
+
+        VBox vbox = new VBox(barChart, barChartAlphabet);
 
         Scene scene = new Scene(vbox, 800, 600);
 
@@ -238,9 +272,10 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-        String encryptedText = cesarTests();
-        CesarBruteForce.bruteForce(encryptedText);
+//        String encryptedText = cesarTests();
+//        BruteForce.cesar(encryptedText);
+//        BruteForce.affine(encryptedText);
 
-//        launch();
+        launch();
     }
 }
