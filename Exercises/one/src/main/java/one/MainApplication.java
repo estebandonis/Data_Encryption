@@ -1,5 +1,8 @@
 package one;
 
+import java.io.IOException;
+import java.util.*;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -8,17 +11,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import one.cypherFunctions.AsciiFunctions;
-import one.cypherFunctions.Base64Functions;
-import one.cypherFunctions.BinaryFunctions;
-import one.cypherFunctions.KeyFunctions;
-import one.cyphers.AffineCipher;
-import one.cyphers.CesarCipher;
-import one.cyphers.Probability;
-import one.cyphers.VigenereCipher;
 
-import java.io.IOException;
-import java.util.*;
+import one.cypherFunctions.*;
+import one.cyphers.*;
+import one.bruteForce.*;
 
 public class MainApplication extends Application {
     private static final Scanner scanner = new Scanner(System.in);
@@ -146,7 +142,7 @@ public class MainApplication extends Application {
         System.out.println("Ascii Text: " + cipherText);
     }
 
-    private static void cesarTests() {
+    private static String cesarTests() {
         System.out.print("Enter the text to encrypt: ");
         String textToEncrypt = scanner.nextLine();
         System.out.print("Enter the key to encrypt: ");
@@ -160,6 +156,8 @@ public class MainApplication extends Application {
 
         String decryptedText = CesarCipher.decrypt(encryptedText, key);
         System.out.println("Decrypted Text: " + decryptedText);
+
+        return encryptedText;
     }
 
     private static void affineTests() {
@@ -201,9 +199,7 @@ public class MainApplication extends Application {
         String text = "holaaaa";
         System.out.println("Text: " + text);
 
-        Map<Character, Float> frequencyMap = Probability.getFrequencyMap(text);
-
-        return frequencyMap;
+        return Probability.getFrequencyMap(text);
     }
 
     @Override
@@ -242,6 +238,9 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        String encryptedText = cesarTests();
+        CesarBruteForce.bruteForce(encryptedText);
+
+//        launch();
     }
 }
