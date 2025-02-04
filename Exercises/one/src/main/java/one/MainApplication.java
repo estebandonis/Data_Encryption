@@ -142,33 +142,19 @@ public class MainApplication extends Application {
         System.out.println("Ascii Text: " + cipherText);
     }
 
-    private static String cesarTests() {
-        System.out.print("Enter the text to encrypt: ");
-        String textToEncrypt = scanner.nextLine();
-        System.out.print("Enter the key to encrypt: ");
-        byte key = scanner.nextByte();
-
-        System.out.println("Text: " + textToEncrypt);
-        System.out.println("Key: " + key);
+    private static void cesarTests(String textToEncrypt, byte key) {
+        System.out.println("Text to encrypt: " + textToEncrypt);
+        System.out.println("Shifts Key: " + key);
 
         String encryptedText = CesarCipher.encrypt(textToEncrypt, key);
         System.out.println("Encrypted Text: " + encryptedText);
 
         String decryptedText = CesarCipher.decrypt(encryptedText, key);
         System.out.println("Decrypted Text: " + decryptedText);
-
-        return encryptedText;
     }
 
-    private static void affineTests() {
-        System.out.print("Enter the text to encrypt: ");
-        String textToEncrypt = scanner.nextLine();
-        System.out.print("Enter the multiplicative key to encrypt: ");
-        byte multiplicativeKey = scanner.nextByte();
-        System.out.print("Enter the additive key to encrypt: ");
-        byte additiveKey = scanner.nextByte();
-
-        System.out.println("Text: " + textToEncrypt);
+    private static void affineTests(String textToEncrypt, byte multiplicativeKey, byte additiveKey) {
+        System.out.println("Text to encrypt: " + textToEncrypt);
         System.out.println("Multiplicative Key: " + multiplicativeKey);
         System.out.println("Additive Key: " + additiveKey);
 
@@ -179,12 +165,7 @@ public class MainApplication extends Application {
         System.out.println("Decrypted Text: " + decryptedText);
     }
 
-    private static void vigenereTests() {
-        System.out.print("Enter the text to encrypt: ");
-        String textToEncrypt = scanner.nextLine();
-        System.out.print("Enter the key to encrypt: ");
-        String keyWord = scanner.nextLine();
-
+    private static void vigenereTests(String textToEncrypt, String keyWord) {
         System.out.println("Text: " + textToEncrypt);
         System.out.println("Key word: " + keyWord);
 
@@ -196,8 +177,7 @@ public class MainApplication extends Application {
     }
 
     private static Map<Character, Float> probabilityTests() {
-        System.out.print("Type a word: " );
-        String text = scanner.nextLine();
+        String text = "parangaricutirimicuaro";
         Map<Character, Float> textFrequencies = Probability.getFrequencyMap(text);
 
         compareFrequencies(textFrequencies);
@@ -272,10 +252,18 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-//        String encryptedText = cesarTests();
-//        BruteForce.cesar(encryptedText);
-//        BruteForce.affine(encryptedText);
+        String textToEncrypt = "parangaricutirimicuaro";
 
+        System.out.println("Cesar Cipher\n");
+        cesarTests(textToEncrypt, (byte) 3);
+
+        System.out.println("\n\nAffine Cipher\n");
+        affineTests(textToEncrypt, (byte) 5, (byte) 7);
+
+        System.out.println("\n\nVigenere Cipher\n");
+        vigenereTests(textToEncrypt, "key");
+
+        System.out.println("\n\nProbability Tests\n");
         launch();
     }
 }

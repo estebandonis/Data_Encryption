@@ -13,7 +13,7 @@ public class CesarCipher {
         // Encrypted message variable to store the result
         StringBuilder encryptedMessage = new StringBuilder();
 
-        text = text.toLowerCase();
+        text = TextCipher.cleanText(text);
 
         // Loop to iterate over every character in the given text
         for (int i = 0; i < text.length(); i++) {

@@ -76,7 +76,7 @@ public class VigenereCipher {
         StringBuilder encryptedText = new StringBuilder();
 
         // We make sure the text is in lowercase
-        textToEncrypt = textToEncrypt.toLowerCase();
+        textToEncrypt = TextCipher.cleanText(textToEncrypt);
         // We make sure the key is even
         key = evenKey(textToEncrypt, key);
 

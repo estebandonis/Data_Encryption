@@ -20,28 +20,33 @@ public class AffineCipher {
             return 0;
 
         // Apply extended Euclid Algorithm
-        while (a > 1) {
-            // q is quotient
-            q = a / m;
 
-            t = m;
+        try {
+            while (a > 1) {
+                // q is quotient
+                q = a / m;
 
-            // m is remainder now, process same as Euclid's algo
-            m = a % m;
-            a = t;
+                t = m;
 
-            t = x0;
+                // m is remainder now, process same as Euclid's algo
+                m = a % m;
+                a = t;
 
-            x0 = x1 - q * x0;
+                t = x0;
 
-            x1 = t;
+                x0 = x1 - q * x0;
+
+                x1 = t;
+            }
+
+            // Make x1 positive
+            if (x1 < 0)
+                x1 += m0;
+
+            return x1;
+        } catch (Exception e) {
+            return -1;
         }
-
-        // Make x1 positive
-        if (x1 < 0)
-            x1 += m0;
-
-        return x1;
     }
 
     /***
@@ -56,7 +61,7 @@ public class AffineCipher {
         StringBuilder encryptedMessage = new StringBuilder();
 
         // Convert the text to lowercase
-        text = text.toLowerCase();
+        text = TextCipher.cleanText(text);
 
         // Iterate over the text character by character
         for (int i = 0; i < text.length(); i++) {
@@ -107,6 +112,10 @@ public class AffineCipher {
                 int charPosition = ALPHABET.indexOf(stringCharacter);
                 // We calculate the new key using the formula a^-1 * (x - b) % m
                 int newKey = ((modInverse(multiplicativeKey, ALPHABET.length()) * ((charPosition - additiveKey) % ALPHABET.length())) % ALPHABET.length() + ALPHABET.length()) % ALPHABET.length();
+                if (newKey < 0) {
+                    decryptedMessage.append(stringCharacter);
+                    continue;
+                }
                 // We get the character at the new position
                 char replaceVal = ALPHABET.charAt(newKey);
                 // We append the character to the decrypted message
