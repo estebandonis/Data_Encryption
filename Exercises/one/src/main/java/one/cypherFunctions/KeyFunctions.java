@@ -4,6 +4,26 @@ package one.cypherFunctions;
  * Class to handle key functions
  */
 public class KeyFunctions {
+
+    /***
+     * Function to make the key even
+     * @param text String
+     * @param key String
+     * @return String
+     */
+    public static String evenKey(String text, String key) {
+        // We check if the text is shorter than the key
+        if (text.length() < key.length()) {
+            // If true, we cut the key to the length of the text
+            key = key.substring(0, text.length());
+        } else {
+            // If false, we fill the key with itself until it reaches the length of the text
+            key = BinaryFunctions.fillString(key, text.length());
+        }
+        // We return the key
+        return key;
+    }
+
     /***
      * Function to generate a random key based on the given number
      * @param number int

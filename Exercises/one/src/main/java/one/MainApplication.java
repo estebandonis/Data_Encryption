@@ -177,7 +177,7 @@ public class MainApplication extends Application {
     }
 
     private static Map<Character, Float> probabilityTests() {
-        String text = "parangaricutirimicuaro";
+        String text = "Una computadora merecería ser considerada inteligente si pudiera engañar a un ser humano para que crea que es un ser humano";
         Map<Character, Float> textFrequencies = Probability.getFrequencyMap(text);
 
         compareFrequencies(textFrequencies);
@@ -251,19 +251,203 @@ public class MainApplication extends Application {
         stage.show();
     }
 
+    public static void lab2A() {
+
+        /***
+         * Implementar una función para convertir una cadena de caracteres a bits.
+         * Por cada carácter de la cadena encontrar la represencación en bytes
+         * (8 bits) del valor ASCII de dicho carácter. La función debe de devolver
+         * la concatenación de todos los bits de la cadena.
+         *
+         * Ejemplo 1:
+         *
+         * Input: hola
+         * Output:
+         *      Ascii To Binary: hola
+         *      Char: h Byte: 104 Binary: 01101000
+         *      Char: o Byte: 111 Binary: 01101111
+         *      Char: l Byte: 108 Binary: 01101100
+         *      Char: a Byte: 97 Binary: 01100001
+         *      Binary String:
+         *      011010000 11011110 11011000 1100001
+         */
+        System.out.println("Ascii To Binary: hola");
+        String asciiToBits1 = AsciiFunctions.asciiToBinary("hola");
+        BinaryFunctions.printBinary(asciiToBits1,8);
+
+        /***
+         * Ejemplo 2:
+         *
+         * Input: guatemala
+         * Output:
+         *      Ascii To Binary: guatemala
+         *      Char: g Byte: 103 Binary: 01100111
+         *      Char: u Byte: 117 Binary: 01110101
+         *      Char: a Byte: 97 Binary: 01100001
+         *      Char: t Byte: 116 Binary: 01110100
+         *      Char: e Byte: 101 Binary: 01100101
+         *      Char: m Byte: 109 Binary: 01101101
+         *      Char: a Byte: 97 Binary: 01100001
+         *      Char: l Byte: 108 Binary: 01101100
+         *      Char: a Byte: 97 Binary: 01100001
+         *      Binary String:
+         *      011001110 11101010 11000010 11101000 11001010 11011010 11000010 11011000 1100001
+         */
+        System.out.println("\n\nAscii To Binary: guatemala");
+        String asciiToBits2 = AsciiFunctions.asciiToBinary("guatemala");
+        BinaryFunctions.printBinary(asciiToBits2, 8);
+
+        /***
+         * Implementar una función para convertir una cadena de bytes a caracteres. Por cada grupo
+         * de 8 bits encontrar su representante correspondiente en ASCII. La función debe de devolver
+         * el texto correspondiente.
+         *
+         * Ejemplo 1:
+         *
+         * Input: 01101000011011110110110001100001
+         * Output:
+         *      Example 1: hola
+         *      Binary: 01101000 Number: 104 Char: h
+         *      Binary: 01101111 Number: 111 Char: o
+         *      Binary: 01101100 Number: 108 Char: l
+         *      Binary: 01100001 Number: 97 Char: a
+         *      Binary String: 01101000011011110110110001100001
+         *      Ascii String: hola
+         */
+        System.out.println("\n\nExample 1: hola");
+        String bitsToAscii1 = AsciiFunctions.binaryToAscii(asciiToBits1);
+        System.out.println("Binary String: " + asciiToBits1);
+        System.out.println("Ascii String: " + bitsToAscii1);
+
+        /***
+         * Ejemplo 2:
+         *
+         * Input: 011001110111010101100001011101001100010101101101011000010110000101
+         * Output:
+         *      Example 2: guatemala
+         *      Binary: 01100111 Number: 103 Char: g
+         *      Binary: 01110101 Number: 117 Char: u
+         *      Binary: 01100001 Number: 97 Char: a
+         *      Binary: 01110100 Number: 116 Char: t
+         *      Binary: 01100101 Number: 101 Char: e
+         *      Binary: 01101101 Number: 109 Char: m
+         *      Binary: 01100001 Number: 97 Char: a
+         *      Binary: 01101100 Number: 108 Char: l
+         *      Binary: 01100001 Number: 97 Char: a
+         *      Binary String: 011001110111010101100001011101000110010101101101011000010110110001100001
+         *      Ascii String: guatemala
+         */
+        System.out.println("\nExample 2: guatemala");
+        String bitsToAscii2 = AsciiFunctions.binaryToAscii(asciiToBits2);
+        System.out.println("Binary String: " + asciiToBits2);
+        System.out.println("Ascii String: " + bitsToAscii2);
+
+
+        /***
+         * Implementar funciones que permitan convertir una cadena de caracteres a Base64,
+         * para esto utilizar la conversión manual (texto a binario, binario a codigo UNICODE).
+         *
+         * Ejemplo 1:
+         * Input: hola
+         * Output: aG9sYQ
+         */
+        String asciiToBase641 = AsciiFunctions.asciiToBase64("hola");
+        System.out.println("\n\nAscii To Base64: " + asciiToBase641);
+
+        /***
+         * Ejemplo 2:
+         *
+         * Input: guatemala
+         * Output: Z3VhdGVtYWxh
+         */
+        String asciiToBase642 = AsciiFunctions.asciiToBase64("guatemala");
+        System.out.println("\n\nAscii To Base64: " + asciiToBase642);
+
+
+        /***
+         * Implementar funciones que permitan convertir una cadena de base 64 a su texto correspondiente
+         * para esto utilizar la conversión manual (texto UNICODE a binario, binario a Codigos ASCII).
+         *
+         * Ejemplo 1:
+         *
+         * Input: aG9sYQ
+         * Output: hola
+         */
+
+        String base64ToAscii1 = Base64Functions.base64ToAscii(asciiToBase641);
+        System.out.println("\n\nBase64 To Ascii: " + asciiToBase641 + " -> " + base64ToAscii1);
+
+        /***
+         * Ejemplo 2:
+         *
+         * Input: Z3VhdGVtYWxh
+         * Output: guatemala
+         */
+        String base64ToAscii2 = Base64Functions.base64ToAscii(asciiToBase642);
+        System.out.println("\n\nBase64 To Ascii: " + asciiToBase642 + " -> " + base64ToAscii2);
+
+        /***
+         * Implementar una función que haga la operación XOR, bit a bit, con dos cadenas de texto.
+         *  a. Recuerde que la llave debe ser de menor o igual tamaño que la palabra
+         *  b. Si en dado caso la llave es menor complementarla para llegar al mismo tamaño
+         *
+         * Ejemplo 1:
+         *
+         * Input: text1 = Hola, text2 = Z
+         * Output:
+         *      Binary String:
+         *      000100100 01101010 01101100 0111011
+         *      Binary: 00010010 Number: 18 Char: 
+         *      Binary: 00110101 Number: 53 Char: 5
+         *      Binary: 00110110 Number: 54 Char: 6
+         *      Binary: 00111011 Number: 59 Char: ;
+         *      XOR Operation: Hola XOR Z -> 56;
+         */
+        String text1 = "Hola";
+        String key1 = "Z";
+
+        String binaryText1 = AsciiFunctions.xorOperation(text1, key1);
+        System.out.println("\n\nText: " + text1 + " Key " + key1);
+        System.out.println("Resulted Text: " + binaryText1);
+
+        /***
+         * Implementar una función que haga la operación XOR, bit a bit, con dos cadenas de texto.
+         *  a. Recuerde que la llave debe ser de menor o igual tamaño que la palabra
+         *  b. Si en dado caso la llave es menor complementarla para llegar al mismo tamaño
+         *
+         * Ejemplo 2:
+         *
+         * Input: text1 = GuateMala, text2 = HJDhkjSHSjkJjdsl
+         * Output:
+         *      Binary String:
+         *      000011110 01111110 01001010 00111000 00011100 01001110 01100100 01001000 0110010
+         *      Binary: 00001111 Number: 15 Char: 
+         *      Binary: 00111111 Number: 63 Char: ?
+         *      Binary: 00100101 Number: 37 Char: %
+         *      Binary: 00011100 Number: 28 Char: 
+         *      Binary: 00001110 Number: 14 Char: 
+         *      Binary: 00100111 Number: 39 Char: '
+         *      Binary: 00110010 Number: 50 Char: 2
+         *      Binary: 00100100 Number: 36 Char: $
+         *      Binary: 00110010 Number: 50 Char: 2
+         *      XOR Operation: GuateMala XOR HJDhkjSHSjkJjdsl
+         *      Resulted Text: ?%'2$2
+         */
+        String text2 = "GuateMala";
+        String key2 = "HJDhkjSHSjkJjdsl";
+
+        String binaryText2 = AsciiFunctions.xorOperation(text2, key2);
+        System.out.println("\n\nXOR Operation: " + text2 + " XOR " + key2);
+        System.out.println("Resulted Text: " + binaryText2);
+    }
+
     public static void main(String[] args) {
-        String textToEncrypt = "parangaricutirimicuaro";
+//        BruteForce.cesar("jjqaopñlhwxañejplzecepwhajyljopwjpaarlhqyeljhwwcehezwzyñemplcñwbeywyñemplwcehezwzmwñwwxñarewñaoqjiaywjeoilzazabajowyñqyewhloxñejzwhwywmwyezwzzailzebeywññwmezwiajpaahqolzawhclñepilouyhwraoyñemplcñwbeyloqjwwyyeljjayaowñewmwñwwjpeyemwñjlowhwobqpqñwowiajwvwozayexañoacqñezwz");
 
-        System.out.println("Cesar Cipher\n");
-        cesarTests(textToEncrypt, (byte) 3);
+//        BruteForce.affine("zigiuñpjdipoziyicbdoddiyxbñhjorbpbdodciñmidiiahxoixdipjcohosmicioxhtpiidmrdipixxjxxiqipjmzoditbpbdodyxmybopsmiñixubhbjopjcohoyozhicpiixpouiujxbodiubpicdicbchiuocfxjtoxbznjxuoybjzqopbjcoociuñxicocsmipjrxoxjzxiymñixoxcixoñbdouizhinmixjzpocsmidiujchxoxjzyxbñhjorbpbdodxiiuñpokozdjxoñbdouizhicmcypoqicyxbñhjrxonbyocfoprjxbhujcyjuñxjuihbdjcñjxjhxjczmiqjcfcirmxjcchibzybdizhicbxqiyjujmzypoxjigiuñpjdipobuñjxhozybodipoyxbñhjorbpbdodizzmichxotohoppoyjzhbzmoyjzhxopocouizokocdbzoubyocdiybtixcirmxbdod");
 
-        System.out.println("\n\nAffine Cipher\n");
-        affineTests(textToEncrypt, (byte) 5, (byte) 7);
+//        BruteForce.vigenere("hola", "hola");
 
-        System.out.println("\n\nVigenere Cipher\n");
-        vigenereTests(textToEncrypt, "key");
-
-        System.out.println("\n\nProbability Tests\n");
-        launch();
+        lab2A();
     }
 }

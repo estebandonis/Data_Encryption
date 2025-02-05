@@ -80,4 +80,16 @@ public class BruteForce {
             }
         }
     }
+
+    public static void vigenere(String encryptedText) {
+        Map<Character, Float> results = Probability.getFrequencyMap(encryptedText);
+
+        Map<Character, Float> alphabetResults = Probability.getFrequencyMap(ALPHABET);
+
+        String keyHint = "PA";
+
+        char key = results.keySet().iterator().next();
+
+
+    }
 }

@@ -49,6 +49,16 @@ public class BinaryFunctions {
         return numberValue;
     }
 
+    public static void printBinary(String binaryString, int groupsNumber) {
+        System.out.println("Binary String: ");
+        for (int i = 0; i < binaryString.length(); i++) {
+            System.out.print(binaryString.charAt(i));
+            if (i % groupsNumber == 0 && i != 0) {
+                System.out.print(" ");
+            }
+        }
+    }
+
     /***
      * Fill the given string with the same characters until it reaches the target length
      * @param input String

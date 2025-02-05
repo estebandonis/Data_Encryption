@@ -1,6 +1,7 @@
 package one.cyphers;
 
 import one.cypherFunctions.BinaryFunctions;
+import one.cypherFunctions.KeyFunctions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,25 +12,6 @@ public class VigenereCipher {
      * Alphabet to use in the cipher
      */
     private static final String ALPHABET = "abcdefghijklmnñopqrstuvwxyz";
-
-    /***
-     * Function to make the key even
-     * @param text String
-     * @param key String
-     * @return String
-     */
-    private static String evenKey(String text, String key) {
-        // We check if the text is shorter than the key
-        if (text.length() < key.length()) {
-            // If true, we cut the key to the length of the text
-            key = key.substring(0, text.length());
-        } else {
-            // If false, we fill the key with itself until it reaches the length of the text
-            key = BinaryFunctions.fillString(key, text.length());
-        }
-        // We return the key
-        return key;
-    }
 
     /***
      * Function to get the Vigenere Mapping
@@ -78,7 +60,7 @@ public class VigenereCipher {
         // We make sure the text is in lowercase
         textToEncrypt = TextCipher.cleanText(textToEncrypt);
         // We make sure the key is even
-        key = evenKey(textToEncrypt, key);
+        key = KeyFunctions.evenKey(textToEncrypt, key);
 
         // We iterate over the text character by character
         for (int i = 0; i < textToEncrypt.length(); i++) {
@@ -119,7 +101,7 @@ public class VigenereCipher {
         // We make sure the text is in lowercase
         textToDecrypt = textToDecrypt.toLowerCase();
         // We make sure the key is even
-        key = evenKey(textToDecrypt, key);
+        key = KeyFunctions.evenKey(textToDecrypt, key);
 
         // We iterate over the text character by character
         for (int i = 0; i < textToDecrypt.length(); i++) {
