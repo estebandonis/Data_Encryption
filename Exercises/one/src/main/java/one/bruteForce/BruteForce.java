@@ -3,6 +3,7 @@ package one.bruteForce;
 import one.cyphers.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BruteForce {
@@ -114,14 +115,25 @@ public class BruteForce {
      * @param encryptedText String
      */
     public static void vigenere(String encryptedText) {
-        Map<Character, Float> results = Probability.getFrequencyMap(encryptedText);
+        String keyHint = "pa";
 
-        Map<Character, Float> alphabetResults = Probability.getFrequencyMap(ALPHABET);
+        String textHint = "nuevaamenazaenelhorizonte";
 
-        String keyHint = "PA";
-
-        char key = results.keySet().iterator().next();
-
-
+        outerloop:
+        for (int i = 0; i < ALPHABET.length(); i++) {
+            for (int e = 0; e < ALPHABET.length(); e++) {
+                for (int o = 0; o < ALPHABET.length(); o++) {
+                    for (int u = 0; u < ALPHABET.length(); u++) {
+                        String key = keyHint + ALPHABET.charAt(i) + ALPHABET.charAt(e) + ALPHABET.charAt(o) + ALPHABET.charAt(u);
+                        System.out.println("Key: " + key);
+                        String decryptedText = VigenereCipher.decrypt(encryptedText, key);
+                        if (decryptedText.contains(textHint)) {
+                            System.out.println("Key: " + key + " -> " + decryptedText);
+                            break outerloop;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

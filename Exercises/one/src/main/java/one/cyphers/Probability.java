@@ -19,7 +19,7 @@ public class Probability {
         return frequencyMap;
     }
 
-    private static Map<Character, Float> sortFrequencies(Map<Character, Float> frequencyMap) {
+    public static Map<Character, Float> sortFrequencies(Map<Character, Float> frequencyMap) {
         List<Map.Entry<Character, Float>> list = new ArrayList<>(frequencyMap.entrySet());
         list.sort(Map.Entry.<Character, Float>comparingByValue().reversed());
         Map<Character, Float> sortedFrequencyMap = new LinkedHashMap<>();

@@ -22,7 +22,7 @@ public class MainApplication extends Application {
     /***
      * Method to run the first exercise tests
      */
-    private static void firstExerciseTests() {
+    private static void ejercicioCifradosTests() {
         String asciiText = "hola";
         System.out.println("Ascii Text: " + asciiText);
 
@@ -142,6 +142,8 @@ public class MainApplication extends Application {
         System.out.println("Ascii Text: " + cipherText);
     }
 
+    /*** Funciones Laboratorio 1 A ***/
+
     private static void cesarTests(String textToEncrypt, byte key) {
         System.out.println("Text to encrypt: " + textToEncrypt);
         System.out.println("Shifts Key: " + key);
@@ -251,6 +253,8 @@ public class MainApplication extends Application {
         stage.show();
     }
 
+    /*** Funciones Laboratorio 2 A ***/
+
     public static void lab2A() {
 
         /***
@@ -271,6 +275,7 @@ public class MainApplication extends Application {
          *      Binary String:
          *      011010000 11011110 11011000 1100001
          */
+        System.out.println("Inciso 1:\n");
         System.out.println("Ascii To Binary: hola");
         String asciiToBits1 = AsciiFunctions.asciiToBinary("hola");
         BinaryFunctions.printBinary(asciiToBits1,8);
@@ -314,7 +319,8 @@ public class MainApplication extends Application {
          *      Binary String: 01101000011011110110110001100001
          *      Ascii String: hola
          */
-        System.out.println("\n\nExample 1: hola");
+        System.out.println("\n\nInciso 2:\n");
+        System.out.println("Example 1: hola");
         String bitsToAscii1 = AsciiFunctions.binaryToAscii(asciiToBits1);
         System.out.println("Binary String: " + asciiToBits1);
         System.out.println("Ascii String: " + bitsToAscii1);
@@ -337,7 +343,7 @@ public class MainApplication extends Application {
          *      Binary String: 011001110111010101100001011101000110010101101101011000010110110001100001
          *      Ascii String: guatemala
          */
-        System.out.println("\nExample 2: guatemala");
+        System.out.println("\n\nExample 2: guatemala");
         String bitsToAscii2 = AsciiFunctions.binaryToAscii(asciiToBits2);
         System.out.println("Binary String: " + asciiToBits2);
         System.out.println("Ascii String: " + bitsToAscii2);
@@ -351,8 +357,10 @@ public class MainApplication extends Application {
          * Input: hola
          * Output: aG9sYQ
          */
+        System.out.println("\n\nInciso 3:\n");
+        System.out.println("Ascii Text: hola");
         String asciiToBase641 = AsciiFunctions.asciiToBase64("hola");
-        System.out.println("\n\nAscii To Base64: " + asciiToBase641);
+        System.out.println("Ascii To Base64: " + asciiToBase641);
 
         /***
          * Ejemplo 2:
@@ -360,8 +368,9 @@ public class MainApplication extends Application {
          * Input: guatemala
          * Output: Z3VhdGVtYWxh
          */
+        System.out.println("\n\nAscii Text: guatemala");
         String asciiToBase642 = AsciiFunctions.asciiToBase64("guatemala");
-        System.out.println("\n\nAscii To Base64: " + asciiToBase642);
+        System.out.println("Ascii To Base64: " + asciiToBase642);
 
 
         /***
@@ -373,9 +382,10 @@ public class MainApplication extends Application {
          * Input: aG9sYQ
          * Output: hola
          */
-
+        System.out.println("\n\nInciso 4:\n");
+        System.out.println("Base64 Text: aG9sYQ");
         String base64ToAscii1 = Base64Functions.base64ToAscii(asciiToBase641);
-        System.out.println("\n\nBase64 To Ascii: " + asciiToBase641 + " -> " + base64ToAscii1);
+        System.out.println("Base64 To Ascii: " + asciiToBase641 + " -> " + base64ToAscii1);
 
         /***
          * Ejemplo 2:
@@ -383,8 +393,9 @@ public class MainApplication extends Application {
          * Input: Z3VhdGVtYWxh
          * Output: guatemala
          */
+        System.out.println("\n\nBase64 Text: Z3VhdGVtYWxh");
         String base64ToAscii2 = Base64Functions.base64ToAscii(asciiToBase642);
-        System.out.println("\n\nBase64 To Ascii: " + asciiToBase642 + " -> " + base64ToAscii2);
+        System.out.println("Base64 To Ascii: " + asciiToBase642 + " -> " + base64ToAscii2);
 
         /***
          * Implementar una función que haga la operación XOR, bit a bit, con dos cadenas de texto.
@@ -406,8 +417,9 @@ public class MainApplication extends Application {
         String text1 = "Hola";
         String key1 = "Z";
 
+        System.out.println("\n\nInciso 5:\n");
         String binaryText1 = AsciiFunctions.xorOperation(text1, key1);
-        System.out.println("\n\nText: " + text1 + " Key " + key1);
+        System.out.println("Text: " + text1 + " Key " + key1);
         System.out.println("Resulted Text: " + binaryText1);
 
         /***
@@ -441,13 +453,20 @@ public class MainApplication extends Application {
         System.out.println("Resulted Text: " + binaryText2);
     }
 
+
+    /*** Funciones Laboratorio 1 B ***/
+
+    public static void lab1B() {
+        BruteForce.cesar("jjqaopñlhwxañejplzecepwhajyljopwjpaarlhqyeljhwwcehezwzyñemplcñwbeywyñemplwcehezwzmwñwwxñarewñaoqjiaywjeoilzazabajowyñqyewhloxñejzwhwywmwyezwzzailzebeywññwmezwiajpaahqolzawhclñepilouyhwraoyñemplcñwbeyloqjwwyyeljjayaowñewmwñwwjpeyemwñjlowhwobqpqñwowiajwvwozayexañoacqñezwz");
+
+        BruteForce.affine("zigiuñpjdipoziyicbdoddiyxbñhjorbpbdodciñmidiiahxoixdipjcohosmicioxhtpiidmrdipixxjxxiqipjmzoditbpbdodyxmybopsmiñixubhbjopjcohoyozhicpiixpouiujxbodiubpicdicbchiuocfxjtoxbznjxuoybjzqopbjcoociuñxicocsmipjrxoxjzxiymñixoxcixoñbdouizhinmixjzpocsmidiujchxoxjzyxbñhjorbpbdodxiiuñpokozdjxoñbdouizhicmcypoqicyxbñhjrxonbyocfoprjxbhujcyjuñxjuihbdjcñjxjhxjczmiqjcfcirmxjcchibzybdizhicbxqiyjujmzypoxjigiuñpjdipobuñjxhozybodipoyxbñhjorbpbdodizzmichxotohoppoyjzhbzmoyjzhxopocouizokocdbzoubyocdiybtixcirmxbdod");
+
+        BruteForce.vigenere("pulqnstlcrkdhhcakiqlcevhthyshzkcgofosoqiwafrchsnknynnslaymwbpzyefsahnrañenrezdñlycnoctgcssieqasatnyzsfkeñuwrtarrsktsyrmdsaqnnsitpalrtfcnloialtwhseouwiednelitpcrvwsobetsboqavdftyrdorrgpmdpgglarpdñakosedefrtrlolrxsñofwqlcefzpsñrabriñadsisnlnqxolelrtcpiiiegpaxwppnsujpnriuofqadwzpaatnoaibavzpetivsccgavsaaymwbpzyifaxncnmssejaudbpstsqxolcnoctgcsnpeqtsogugeletcgadatnreudctccfwraqchaesrokscoudwqhyñtdojepsfraqseqotsrafscjseydinblwhknkemdsocnwzgucswgebynvojoqcathabolnieyleorelafvpsrajjtlnsiwharalwcfnreojiaolekebafrtsaixgprjolapsrakrtcnnnbpcnmijjabokoruynmwracsmdiienatxcyufopmcnsñpilmabtnreddidythhridrsresqeydclnswhjaldsgtsycmjplcsishoyleorelavdipyrsjcdcsuwurydhtktsrhsityrsbtnpiwhvowajjtlysudbpstsrerysujpnriuoietefikajmwbjepoeetrynddimcthresbeuwurydhortsadsipnrddjalthhcdjeljcazoeppdctasbpnynbrlyrhgtcnrvojopihrtlyukutnaisrtaatnoaixakbkeqtkdimcthresbeuwurydhepryqnsieynlsvupoleprylsqemñumorinnujpnriuotlcnxdgucpjqpbnrvoaaleusiibavrtcpiiieaeidwsabchblujnwgpbglarpdcsudboqnvzgucpksieltsbknñedwvrncdohowpksieltwowopawhtlkoesctndwrprsnloatncnoctgchscnselihaaraejoerstxa");
+    }
+
+
     public static void main(String[] args) {
-//        BruteForce.cesar("jjqaopñlhwxañejplzecepwhajyljopwjpaarlhqyeljhwwcehezwzyñemplcñwbeywyñemplwcehezwzmwñwwxñarewñaoqjiaywjeoilzazabajowyñqyewhloxñejzwhwywmwyezwzzailzebeywññwmezwiajpaahqolzawhclñepilouyhwraoyñemplcñwbeyloqjwwyyeljjayaowñewmwñwwjpeyemwñjlowhwobqpqñwowiajwvwozayexañoacqñezwz");
-
-//        BruteForce.affine("zigiuñpjdipoziyicbdoddiyxbñhjorbpbdodciñmidiiahxoixdipjcohosmicioxhtpiidmrdipixxjxxiqipjmzoditbpbdodyxmybopsmiñixubhbjopjcohoyozhicpiixpouiujxbodiubpicdicbchiuocfxjtoxbznjxuoybjzqopbjcoociuñxicocsmipjrxoxjzxiymñixoxcixoñbdouizhinmixjzpocsmidiujchxoxjzyxbñhjorbpbdodxiiuñpokozdjxoñbdouizhicmcypoqicyxbñhjrxonbyocfoprjxbhujcyjuñxjuihbdjcñjxjhxjczmiqjcfcirmxjcchibzybdizhicbxqiyjujmzypoxjigiuñpjdipobuñjxhozybodipoyxbñhjorbpbdodizzmichxotohoppoyjzhbzmoyjzhxopocouizokocdbzoubyocdiybtixcirmxbdod");
-
-//        BruteForce.vigenere("hola", "hola");
-
-        lab2A();
+//        lab2A();
+        lab1B();
     }
 }
