@@ -2,6 +2,7 @@ package one;
 
 import java.io.IOException;
 import java.util.*;
+import java.io.File;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import one.cypherFunctions.*;
 import one.cyphers.*;
 import one.bruteForce.*;
+import one.images.Images;
 
 public class MainApplication extends Application {
     private static final Scanner scanner = new Scanner(System.in);
@@ -465,8 +467,30 @@ public class MainApplication extends Application {
     }
 
 
-    public static void main(String[] args) {
-//        lab2A();
-        lab1B();
+    /*** Funciones Laboratorio 2 B ***/
+
+    public static void lab2B() throws IOException {
+        /***
+         * 2. Dada la imagen XOR_Imagen, y la llave “cifrados_2025” encontrar el valor original de la imagen.
+         *      a. Deben de convertir la imagen a base 64 y aplicarle un xor con la llave para encontrar su valor.
+         *
+         * Input: Image url, Key, output url
+         * Output: Created a new image from the XOR operation in path output.png
+         */
+        Images.xorOperationImageKey(new File("src/main/java/one/images/imagen_xor.png"), "cifrados_2025", "src/main/java/one/images/output.png");
+
+
+        /***
+         * 4. Investigar como aplicar un xor a 2 imágenes. Para esto deben de seleccionar 2 imágenes, luego proceder hacer un xor entre las dos imágenes. Esto significa que una imagen es la original y la otra se utilizará como llave para aplicar el xor.
+         *      a. Mostrar las imágenes utilizadas y el resultado, asi mismo explique que inconvenientes encontró al momento de realizar el xor.
+         *
+         * Input: First image URL, Second image URL, output url
+         * Output: Created a new image merged from the XOR operation of the two images in path merge.jpg
+         */
+        Images.xorOperationImages(new File("src/main/java/one/images/minecraft.jpg"), new File("src/main/java/one/images/terraria.jpeg"), "src/main/java/one/images/merge.jpg");
+    }
+
+    public static void main(String[] args) throws IOException {
+        lab2B();
     }
 }

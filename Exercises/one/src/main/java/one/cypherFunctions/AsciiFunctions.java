@@ -27,7 +27,6 @@ public class AsciiFunctions {
             if (binaryValue.length() < 8) {
                 binaryValue = "0".repeat(8 - binaryValue.length()) + binaryValue;
             }
-            System.out.println("Char: " + charValue + " Byte: " + byteValue + " Binary: " + binaryValue);
             // We append the binary value to the binary string
             binaryString.append(binaryValue);
         }
@@ -52,7 +51,6 @@ public class AsciiFunctions {
             int numberValue = BinaryFunctions.binaryToNumber(binaryValue);
             // We cast the number to a character (ASCII character)
             char asciiChar = (char) numberValue;
-            System.out.println("Binary: " + binaryValue + " Number: " + numberValue + " Char: " + asciiChar);
             // We append the ascii character to the ascii string
             asciiString.append(asciiChar);
         }
@@ -73,14 +71,8 @@ public class AsciiFunctions {
     public static String xorOperation(String text, String key) {
         key = KeyFunctions.evenKey(text, key);
 
-        System.out.println("Text: " + text);
-        System.out.println("Key: " + key + "\n");
-
         String textBinary = asciiToBinary(text);
         String keyBinary = asciiToBinary(key);
-
-        System.out.println("Text Binary: " + textBinary);
-        System.out.println("Key Binary: " + keyBinary);
 
         String xorString = BinaryFunctions.xorBinary(textBinary, keyBinary);
         assert xorString != null;
