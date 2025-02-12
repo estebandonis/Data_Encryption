@@ -76,6 +76,7 @@ La estructura del proyecto está organizada de la siguiente manera:
 
 Las principales dependencias del proyecto incluyen:
 * [![Java][Java]][Java-url]
+* [![JavaFX][JavaFX]][JavaFX-url]
 <!-- * [![Next][Next.js]][Next-url] -->
 <!-- * [![React][React.js]][React-url] -->
 <!-- * [![Bootstrap][Bootstrap.com]][Bootstrap-url] -->
@@ -137,6 +138,8 @@ Si tienes preguntas o comentarios, puedes contactarnos a traves de nuestras rede
 <!-- MARKDOWN LINKS & IMAGES -->
 [Java]: https://img.shields.io/badge/Java-3776AB?style=flat&logo=java&logoColor=white
 [Java-url]: https://www.java.com/
+[JavaFX]: https://img.shields.io/badge/javafx-er2?style=flat&logo=javafx&color=orange
+[JavaFX-url]: https://openjfx.io/
 [Website]: https://img.shields.io/website?url=https://lc2tech.com/
 [Website-url]: https://estebandonis.netlify.app/
 [Linkedin-est]: https://www.linkedin.com/in/esteban-donis-384819204/
