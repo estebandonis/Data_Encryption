@@ -4,14 +4,29 @@ public class BinaryOperations
 {
     public static string TextToBinary(string textString)
     {
-        var result = "";
-        
-        foreach (var c in textString)
-        {
-            result += Convert.ToString(c, 2).PadLeft(8, '0');
+        return string.Concat(textString.Select(cha => Convert.ToString(cha, 2).PadLeft(8, '0')));
+    }
+    
+    public static string NumbersToBinary(string textString)
+    {
+        return string.Concat(textString.Select(cha => NumberToBinary(long.Parse(cha.ToString()))));
+    }
+    
+    private static string NumberToBinary(long number)
+    {
+        var binaryString = "";
+
+        while (number > 0) {
+            binaryString += (number % 2);
+            number /= 2;
         }
 
-        return result;
+        if (binaryString.Length < 4)
+        {
+            binaryString = binaryString.PadLeft(4, '0');
+        }
+        
+        return binaryString;
     }
     
     public static string XorOperation(string textString, string keyString)
