@@ -36,18 +36,4 @@ public class StreamCipher
     
         return long.Parse(result);
     }
-    
-    public string BinaryPRNG(int length)
-    {
-        var seed = generateRandomSeed();
-        var result = "";
-        
-        for (var i = 0; i < length; i++)
-        {
-            var bit = NextNumber(seed) % 2;
-            result += bit.ToString();
-        }
-
-        return result;
-    }
 }
