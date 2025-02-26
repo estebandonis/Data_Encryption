@@ -20,20 +20,17 @@ public class StreamCipher
         return seed;
     }
 
-    public long PRNG(int length)
+    public string PRNG(int length)
     {
         var seed = generateRandomSeed();
         var result = "";
 
-        Console.WriteLine($"Seed: {seed}");
         for (var i = 0; i < length; i++)
         {
             seed = NextNumber(seed);
             result += ((seed % 9) + 1).ToString();
         }
-
-        Console.WriteLine($"Result: {result}");
-    
-        return long.Parse(result);
+        
+        return result;
     }
 }

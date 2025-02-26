@@ -29,6 +29,11 @@ public class BinaryOperations
         return binaryString;
     }
     
+    public static string KeystreamToBinary(string keyStream)
+    {
+        return NumbersToBinary(keyStream);
+    }
+    
     public static string XorOperation(string textString, string keyString)
     {
         if (textString.Length != keyString.Length)
