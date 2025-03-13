@@ -491,6 +491,6 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        lab2B();
+        BruteForce.cesar("SV OHU JVUZLNBPKV, OHU LUJVUAYHKV BUH MSHN WHYH LS ZPNBPLUAL KLZHMPV MSHN{JYFWAV_HUHSFZPZ}");
     }
 }
