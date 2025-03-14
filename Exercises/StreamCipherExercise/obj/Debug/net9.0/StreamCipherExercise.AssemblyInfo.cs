@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StreamCipherExercise")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24366b831fc592721f2050b5ac2333cbc934bf69")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9983a78333c7e0e53551e53244cd77752a82e4c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("StreamCipherExercise")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StreamCipherExercise")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

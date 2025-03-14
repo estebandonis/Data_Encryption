@@ -1,6 +1,9 @@
 ﻿using System.Security.Cryptography;
 using BlockCipherExercise;
 using System.Text;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Png;
+using System.IO;
 
 class Program
 {
@@ -40,11 +43,10 @@ class Program
         return key;
     }
     
-    private static void DesCipher(string mode)
+    private static void DesCipher(string inputString, string mode)
     {
         Console.WriteLine($"\nPrueba con {mode}");
         
-        var inputString = "Hola mundo";
         var key = GenerateRandomKey("DES");
         Console.WriteLine($"Input: {inputString}, Mode: {mode}");
         
@@ -59,11 +61,10 @@ class Program
         Console.WriteLine($"Decrypted Text: {Encoding.UTF8.GetString(decryptedData)}");
     }
 
-    private static void TripleCipher(string mode)
+    private static void TripleCipher(string inputString, string mode)
     {
         Console.WriteLine($"\nPrueba con {mode}");
         
-        var inputString = "Hola mundo";
         var key = GenerateRandomKey("3DES");
         Console.WriteLine($"Input: {inputString}, Mode: {mode}");
         
@@ -77,36 +78,94 @@ class Program
         Console.WriteLine($"Decrypted Text: {Encoding.UTF8.GetString(decryptedData)}");
     }
     
-    private static void AesCipher(string mode)
+    private static void AesCipher(byte[] inputString, string mode)
     {
         Console.WriteLine($"\nPrueba con {mode}");
         
-        var inputString = "Hola mundo";
         var key = GenerateRandomKey("AES");
         Console.WriteLine($"Input: {inputString}, Mode: {mode}");
         
         var encryptedData = AesImplementation.Encrypt(inputString, key, mode);
-        Console.WriteLine($"Encrypted Text: {Encoding.UTF8.GetString(encryptedData)}");
-        Console.WriteLine($"{BitConverter.ToString(encryptedData)}");
-        Console.WriteLine($"Key: {Encoding.UTF8.GetString(key)}");
-        Console.WriteLine($"{BitConverter.ToString(key)}");
+        SaveByteArrayToPng(encryptedData, $"/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/encrypted{mode}.png");
         
         var decryptedData = AesImplementation.Decrypt(encryptedData, key, mode);
-        Console.WriteLine($"Decrypted Text: {Encoding.UTF8.GetString(decryptedData)}");
+        SaveByteArrayToPng(decryptedData, $"/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/decrypted{mode}.png");
+    }
+
+    private static string ReadFile(string path)
+    {
+        try
+        {
+            return File.ReadAllText(path);
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("The file was not found.");
+            return "";
+        }
+        catch (IOException ex)
+        {
+            Console.WriteLine($"An error occurred while reading the file: {ex.Message}");
+            return "";
+        }
+    }
+    
+    private static byte[] ReadBinaryFile(string path)
+    {
+        try
+        {
+            return File.ReadAllBytes(path);
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("The file was not found.");
+            return [];
+        }
+        catch (IOException ex)
+        {
+            Console.WriteLine($"An error occurred while reading the file: {ex.Message}");
+            return [];
+        }
+    }
+
+    private static void SaveByteArrayToPng(byte[] data, string outputPath)
+    {
+        try
+        {
+            // Make sure the directory exists
+            string directory = Path.GetDirectoryName(outputPath);
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+        
+            // Write the raw bytes directly to a file
+            File.WriteAllBytes(outputPath, data);
+            Console.WriteLine($"Data saved to {outputPath}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving data: {ex.Message}");
+        }
     }
     
     private static void Main(string[] args)
     {
-        Console.WriteLine("Prueba con DES");
-        DesCipher("ECB");
-        DesCipher("CBC");
+        string desInput, tripleDesInput;
         
-        Console.WriteLine("\n\nPrueba con 3DES");
-        TripleCipher("ECB");
-        TripleCipher("CBC");
+        // Console.WriteLine("Prueba con DES");
+        // desInput = ReadFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/des.txt");
+        // DesCipher(desInput, "ECB");
+        // DesCipher(desInput, "CBC");
+        //
+        // Console.WriteLine("\n\nPrueba con 3DES");
+        // tripleDesInput = ReadFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/3des.txt");
+        // TripleCipher(tripleDesInput, "ECB");
+        // TripleCipher(tripleDesInput, "CBC");
         
         Console.WriteLine("\n\nPrueba con AES");
-        AesCipher("ECB");
-        AesCipher("CBC");
+        byte[] aesImageBytes = ReadBinaryFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/aespic.png");
+        AesCipher(aesImageBytes, "ECB");
+        AesCipher(aesImageBytes, "CBC");
     }    
 }

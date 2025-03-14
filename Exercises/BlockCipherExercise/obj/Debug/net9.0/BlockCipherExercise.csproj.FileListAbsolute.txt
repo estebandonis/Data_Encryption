@@ -13,3 +13,6 @@
 /Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Exercises/BlockCipherExercise/obj/Debug/net9.0/BlockCipherExercise.pdb
 /Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Exercises/BlockCipherExercise/obj/Debug/net9.0/BlockCipherExercise.genruntimeconfig.cache
 /Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Exercises/BlockCipherExercise/obj/Debug/net9.0/ref/BlockCipherExercise.dll
+/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Exercises/BlockCipherExercise/bin/Debug/net9.0/SixLabors.ImageSharp.dll
+/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Exercises/BlockCipherExercise/obj/Debug/net9.0/BlockCipherExercise.csproj.AssemblyReference.cache
+/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Exercises/BlockCipherExercise/obj/Debug/net9.0/BlockCip.A730D896.Up2Date

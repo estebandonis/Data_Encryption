@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "PNwaCDPWf2A=",
+  "dgSpecHash": "HQrwm/asX6M=",
   "success": true,
   "projectFilePath": "/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Exercises/BlockCipherExercise/BlockCipherExercise.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/estebandonis/.nuget/packages/sixlabors.imagesharp/3.1.7/sixlabors.imagesharp.3.1.7.nupkg.sha512"
+  ],
   "logs": []
 }

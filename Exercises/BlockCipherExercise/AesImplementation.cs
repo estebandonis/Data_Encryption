@@ -5,10 +5,8 @@ using System.Security.Cryptography;
 
 public class AesImplementation
 {
-    public static byte[] Encrypt(string inputString, byte[] key, string mode)
+    public static byte[] Encrypt(byte[] data, byte[] key, string mode)
     {
-        var data = Encoding.UTF8.GetBytes(inputString);
-
         using (SymmetricAlgorithm aes = Aes.Create())
         {
             aes.Key = key;
