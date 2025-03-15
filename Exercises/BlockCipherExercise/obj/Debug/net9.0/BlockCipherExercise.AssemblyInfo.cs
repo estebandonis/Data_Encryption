@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlockCipherExercise")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+528e1c3b922b4b90fb81092abe9393b65480f11a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+477ab917a5f7a274ada8901db53d8d4b4794350a")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlockCipherExercise")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlockCipherExercise")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
