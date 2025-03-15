@@ -122,6 +122,23 @@ class Program
         EncryptImageAndSaveAsPng(imageBytesTux, mode, encryptedPathTux, key);
         encryptedPathImage = $"/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Laboratories/Lab3/resources/encrypted_image_{mode}.png";
         EncryptImageAndSaveAsPng(imageBytesImage, mode, encryptedPathImage, key);
+        
+        /*
+         * Preguntas:
+         * 1. ¿Por qué el cifrado ECB revela los patrones de la imagen?
+         * El cifrado ECB revela los patrones de la imagen porque como se cifra bloque por bloque independientemente de los demás, esto genera que el cifrado no sea
+         * aleatorio y se puedan distinguir algunos patrones de la imagen original. Esto crea una falta de difusión en la imagen, al presentar encriptaciones similares
+         * entre patrones de imágenes de una área similar.
+         * 
+         * 2. ¿Cómo cambia la apariencia con CBC?
+         * Se puede ver que los píxeles son totalmente aleatorios, por lo que no se puede distinguir ninguna clase de patrón de la imagen digital.
+         * Esto se debe a la forma en la que se realiza CBC, la cual es más segura que ECB, cifrando el bloque siguiente con el bloque anterior, asegurando un
+         * cifrado mucho más seguro.
+         * 
+         * 3. ¿Qué tan seguro es usar ECB para cifrar datos estructurados?
+         * Por su falta de difusión y ruido dentro de los patrones, ECB no es seguro para cifrar datos estructurados, siendo proceso a repetir cifrados de bloques iguales.
+         * Lo que lo hace vulnerable a ataques de análisis de frecuencia y otros tipos de ataques.
+         */
     }
     
     private static void Main(string[] args)
