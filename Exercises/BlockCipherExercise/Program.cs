@@ -135,14 +135,12 @@ class Program
     {
         try
         {
-            // Make sure the directory exists
             string directory = Path.GetDirectoryName(outputPath);
             if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
             }
         
-            // Write the raw bytes directly to a file
             File.WriteAllBytes(outputPath, data);
             Console.WriteLine($"Data saved to {outputPath}");
         }
@@ -156,12 +154,10 @@ class Program
 {
     try
     {
-        // Load the original image
         using var inputStream = new MemoryStream(imageBytes);
         using var originalImage = Image.Load<Rgba32>(inputStream);
         
-        // Extract pixel data for encryption
-        byte[] pixelData = new byte[originalImage.Width * originalImage.Height * 4]; // 4 bytes per pixel (RGBA)
+        byte[] pixelData = new byte[originalImage.Width * originalImage.Height * 4];
         int i = 0;
         
         originalImage.ProcessPixelRows(accessor => {
@@ -177,18 +173,14 @@ class Program
             }
         });
         
-        // Generate key and encrypt pixel data
         var encryptedPixels = AesImplementation.Encrypt(pixelData, key, mode);
         
-        // Create new image with encrypted pixels
         using var encryptedImage = new Image<Rgba32>(originalImage.Width, originalImage.Height);
         i = 0;
         
-        // We'll handle CBC differently because of the IV
         int dataOffset = 0;
         if (mode == "CBC") {
-            // Skip the IV (which is at the beginning of encryptedPixels)
-            dataOffset = 16; // AES block size
+            dataOffset = 16;
         }
         
         encryptedImage.ProcessPixelRows(accessor => {
@@ -196,7 +188,6 @@ class Program
                 Span<Rgba32> row = accessor.GetRowSpan(y);
                 for (int x = 0; x < row.Length; x++) {
                     if (i + 3 < encryptedPixels.Length - dataOffset) {
-                        // Use the encrypted bytes as R,G,B,A values
                         row[x] = new Rgba32(
                             encryptedPixels[dataOffset + i++],
                             encryptedPixels[dataOffset + i++],
@@ -208,15 +199,9 @@ class Program
             }
         });
         
-        // Save the encrypted image
         using var outputStream = new FileStream(outputPath, FileMode.Create);
         encryptedImage.Save(outputStream, new PngEncoder());
         Console.WriteLine($"Encrypted image saved to {outputPath}");
-        
-        // Save the key for decryption
-        string keyPath = Path.ChangeExtension(outputPath, "key");
-        File.WriteAllBytes(keyPath, key);
-        Console.WriteLine($"Encryption key saved to {keyPath}");
     }
     catch (Exception ex)
     {
@@ -226,10 +211,10 @@ class Program
     
     private static void Main(string[] args)
     {
-        // string desInput, tripleDesInput;
-        //
-        // Console.WriteLine("Prueba con DES");
-        // desInput = ReadFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/des.txt");
+        string desInput, tripleDesInput;
+        
+        Console.WriteLine("Prueba con DES");
+        desInput = ReadFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/des.txt");
         
         /*
          * Entrada:
@@ -251,7 +236,7 @@ class Program
            key schedule of DES is used to derive a sequence of 48-bit sub-keys k1, . . . , k16
            from the 56-bit master key.
          */
-        // DesCipher(desInput, "ECB");
+        DesCipher(desInput, "ECB");
         
         /*
          * Entrada:
@@ -273,7 +258,7 @@ class Program
            key schedule of DES is used to derive a sequence of 48-bit sub-keys k1, . . . , k16
            from the 56-bit master key.
          */
-        // DesCipher(desInput, "CBC");
+        DesCipher(desInput, "CBC");
         
         /*
          * Entrada:
@@ -285,7 +270,7 @@ class Program
          *
          * Decrypted: Hola mundo!
          */
-        // DesCipher("Hola mundo!", "ECB");
+        DesCipher("Hola mundo!", "ECB");
         
         /*
          * Entrada:
@@ -297,13 +282,13 @@ class Program
          *
          * Decrypted: Hola mundo!
          */
-        // DesCipher("Hola mundo!", "CBC");
+        DesCipher("Hola mundo!", "CBC");
         
         
         
         
-        // Console.WriteLine("\n\nPrueba con 3DES");
-        // tripleDesInput = ReadFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/3des.txt");
+        Console.WriteLine("\n\nPrueba con 3DES");
+        tripleDesInput = ReadFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/3des.txt");
         
         /*
          * Entrada:
@@ -325,7 +310,7 @@ class Program
            block cipher to which these techniques have been applied, everything we say
            here applies generically to any block cipher.
          */
-        // TripleCipher(tripleDesInput, "ECB");
+        TripleCipher(tripleDesInput, "ECB");
         
         /*
          * Entrada:
@@ -347,7 +332,7 @@ class Program
            block cipher to which these techniques have been applied, everything we say
            here applies generically to any block cipher.
          */
-        // TripleCipher(tripleDesInput, "CBC");
+        TripleCipher(tripleDesInput, "CBC");
         
         /*
          * Entrada:
@@ -371,7 +356,7 @@ class Program
          *
          * Decrypted: Hola mundo!
          */
-        // TripleCipher("Hola mundo!", "CBC");
+        TripleCipher("Hola mundo!", "CBC");
         
         Console.WriteLine("\n\nPrueba con AES");
         byte[] aesImageBytes = ReadBinaryFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Exercises/BlockCipherExercise/resources/aespic.png");
