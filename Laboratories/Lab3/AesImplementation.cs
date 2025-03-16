@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace BlockCipherExercise;
 using System.Security.Cryptography;
 

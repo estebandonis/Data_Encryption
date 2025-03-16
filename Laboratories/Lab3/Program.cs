@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 using BlockCipherExercise;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
@@ -13,6 +15,7 @@ class Program
             "DES" => 8,
             "3DES" => 24,
             "AES" => aesKeySize / 8,
+            "ChaCha20" => 32,
             _ => 0
         };
         
@@ -106,43 +109,173 @@ class Program
         string mode, encryptedPathTux, encryptedPathImage;
         
         var key = GenerateRandomKey("AES");
-        var imageBytesTux = ReadBinaryFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Informacio\u0301n/Data_Encryption/Laboratories/Lab3/resources/tux.ppm");
-        var imageBytesImage = ReadBinaryFile("/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Laboratories/Lab3/resources/logotrust.jpeg");
+        var imageBytesTux = ReadBinaryFile("./resources/tux.ppm");
+        var imageBytesImage = ReadBinaryFile("./resources/logotrust.jpeg");
 
         mode = "ECB";
         Console.WriteLine($"Encrypting images using {mode} mode");
-        encryptedPathTux = $"/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Laboratories/Lab3/resources/encrypted_tux_{mode}.png";
+        encryptedPathTux = $"./resources/encrypted_tux_{mode}.png";
         EncryptImageAndSaveAsPng(imageBytesTux, mode, encryptedPathTux, key);
-        encryptedPathImage = $"/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Laboratories/Lab3/resources/encrypted_image_{mode}.png";
+        encryptedPathImage = $"./resources/encrypted_image_{mode}.png";
         EncryptImageAndSaveAsPng(imageBytesImage, mode, encryptedPathImage, key);
         
         mode = "CBC";
         Console.WriteLine($"Encrypting images using {mode} mode");
-        encryptedPathTux = $"/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Laboratories/Lab3/resources/encrypted_tux_{mode}.png";
+        encryptedPathTux = $"./resources/encrypted_tux_{mode}.png";
         EncryptImageAndSaveAsPng(imageBytesTux, mode, encryptedPathTux, key);
-        encryptedPathImage = $"/Users/estebandonis/Documents/Noveno Semestre/Cifrado de Información/Data_Encryption/Laboratories/Lab3/resources/encrypted_image_{mode}.png";
+        encryptedPathImage = $"./resources/encrypted_image_{mode}.png";
         EncryptImageAndSaveAsPng(imageBytesImage, mode, encryptedPathImage, key);
+    }
+
+    private static void Part3()
+    {
+        var inputToEncrypt = "Hello World!";
+        var inputBytes = Encoding.UTF8.GetBytes(inputToEncrypt);
+
+        Console.WriteLine("AES 128");
+        var aesKey128 = GenerateRandomKey("AES", 128);
+        
+        var encryptionAes128Stopwatch = Stopwatch.StartNew();
+        var encryptedDataAes128 = AesImplementation.Encrypt(inputBytes, aesKey128, "CBC");
+        encryptionAes128Stopwatch.Stop();
+        
+        var decryptionAes128Stopwatch = Stopwatch.StartNew();
+        var decryptedDataAes128 = AesImplementation.Decrypt(encryptedDataAes128, aesKey128, "CBC");
+        decryptionAes128Stopwatch.Stop();
+        Console.WriteLine($"Decrypted data: {Encoding.UTF8.GetString(decryptedDataAes128)}");
+        Console.WriteLine($"Time taken Encryption: {encryptionAes128Stopwatch.ElapsedTicks} ticks");
+        Console.WriteLine($"Time taken Decryption: {decryptionAes128Stopwatch.ElapsedTicks} ticks");
+
+
+        Console.WriteLine("\n\nAES 192");
+        var aesKey192 = GenerateRandomKey("AES", 192);
+        
+        var encryptionAes192Stopwatch = Stopwatch.StartNew();
+        var encryptedDataAes192 = AesImplementation.Encrypt(inputBytes, aesKey192, "CBC");
+        encryptionAes192Stopwatch.Stop();
+        
+        var decryptionAes192Stopwatch = Stopwatch.StartNew();
+        var decryptedDataAes192 = AesImplementation.Decrypt(encryptedDataAes192, aesKey192, "CBC");
+        decryptionAes192Stopwatch.Stop();
+        Console.WriteLine($"Decrypted data: {Encoding.UTF8.GetString(decryptedDataAes192)}");
+        Console.WriteLine($"Time taken Encryption: {encryptionAes192Stopwatch.ElapsedTicks} ticks");
+        Console.WriteLine($"Time taken Decryption: {decryptionAes192Stopwatch.ElapsedTicks} ticks");
+        
+
+        Console.WriteLine("\n\nAES 256");
+        var aesKey256 = GenerateRandomKey("AES", 256);
+        
+        var encryptionAes256Stopwatch = Stopwatch.StartNew();
+        var encryptedDataAes256 = AesImplementation.Encrypt(inputBytes, aesKey256, "CBC");
+        encryptionAes256Stopwatch.Stop();
+        
+        var decryptionAes256Stopwatch = Stopwatch.StartNew();
+        var decryptedDataAes256 = AesImplementation.Decrypt(encryptedDataAes256, aesKey256, "CBC");
+        decryptionAes256Stopwatch.Stop();
+        Console.WriteLine($"Decrypted data: {Encoding.UTF8.GetString(decryptedDataAes256)}");
+        Console.WriteLine($"Time taken Encryption: {encryptionAes256Stopwatch.ElapsedTicks} ticks");
+        Console.WriteLine($"Time taken Decryption: {decryptionAes256Stopwatch.ElapsedTicks} ticks");
+        
+
+        Console.WriteLine("\n\nChaCha20");
+        var chachaKey = GenerateRandomKey("ChaCha20");
+        
+        var encryptionChaCha20Stopwatch = Stopwatch.StartNew();
+        var encryptedDataChaCha = ChaCha20Implementation.Encrypt(inputBytes, chachaKey);
+        encryptionChaCha20Stopwatch.Stop();
+        
+        var decryptionChaCha20Stopwatch = Stopwatch.StartNew();
+        var decryptedDataChaCha = ChaCha20Implementation.Decrypt(encryptedDataChaCha, chachaKey);
+        decryptionChaCha20Stopwatch.Stop();
+        Console.WriteLine($"Decrypted data: {Encoding.UTF8.GetString(decryptedDataChaCha)}");
+        Console.WriteLine($"Time taken Encryption: {encryptionChaCha20Stopwatch.ElapsedTicks} ticks");
+        Console.WriteLine($"Time taken Decryption: {decryptionChaCha20Stopwatch.ElapsedTicks} ticks");
+
+        
+        var encryptionTimes = new long[] {encryptionAes128Stopwatch.ElapsedTicks, encryptionAes192Stopwatch.ElapsedTicks, encryptionAes256Stopwatch.ElapsedTicks, encryptionChaCha20Stopwatch.ElapsedTicks};
+        var minEncryption= encryptionTimes.Min();
+        var minEncryptPosition = Array.IndexOf(encryptionTimes, minEncryption);
+        
+        var maxEncryption = encryptionTimes.Max();
+        var maxEncryptPosition = Array.IndexOf(encryptionTimes, maxEncryption);
+        
+        var decryptionTimes = new long[] {decryptionAes128Stopwatch.ElapsedTicks, decryptionAes192Stopwatch.ElapsedTicks, decryptionAes256Stopwatch.ElapsedTicks, decryptionChaCha20Stopwatch.ElapsedTicks};
+        
+        var minDecryption = decryptionTimes.Min();
+        var minDecryptPosition = Array.IndexOf(decryptionTimes, minDecryption);
+        
+        var maxDecryption = decryptionTimes.Max();
+        var maxDecryptPosition = Array.IndexOf(decryptionTimes, maxDecryption);
+        
+        string[] algorithmNames = { "AES-128", "AES-192", "AES-256", "ChaCha20" };
+        
+        Console.WriteLine($"\n\nFastest Encrypt: {algorithmNames[minEncryptPosition]} - {minEncryption}ticks");
+        Console.WriteLine($"Slowest Encrypt: {algorithmNames[maxEncryptPosition]} - {maxEncryption}ticks");
+        
+        for (int i = 0; i < encryptionTimes.Length; i++)
+        {
+            Console.WriteLine($"{algorithmNames[i]} - {encryptionTimes[i]} ticks");
+        }
+        
+        Console.WriteLine($"\nFastest Decrypt: {algorithmNames[minDecryptPosition]} - {minDecryption}ticks");
+        Console.WriteLine($"Slowest Decrypt: {algorithmNames[maxDecryptPosition]} - {maxDecryption}ticks");
+        
+        for (int i = 0; i < decryptionTimes.Length; i++)
+        {
+            Console.WriteLine($"{algorithmNames[i]} - {decryptionTimes[i]} ticks");
+        }
         
         /*
-         * Preguntas:
-         * 1. ¿Por qué el cifrado ECB revela los patrones de la imagen?
-         * El cifrado ECB revela los patrones de la imagen porque como se cifra bloque por bloque independientemente de los demás, esto genera que el cifrado no sea
-         * aleatorio y se puedan distinguir algunos patrones de la imagen original. Esto crea una falta de difusión en la imagen, al presentar encriptaciones similares
-         * entre patrones de imágenes de una área similar.
-         * 
-         * 2. ¿Cómo cambia la apariencia con CBC?
-         * Se puede ver que los píxeles son totalmente aleatorios, por lo que no se puede distinguir ninguna clase de patrón de la imagen digital.
-         * Esto se debe a la forma en la que se realiza CBC, la cual es más segura que ECB, cifrando el bloque siguiente con el bloque anterior, asegurando un
-         * cifrado mucho más seguro.
-         * 
-         * 3. ¿Qué tan seguro es usar ECB para cifrar datos estructurados?
-         * Por su falta de difusión y ruido dentro de los patrones, ECB no es seguro para cifrar datos estructurados, siendo proceso a repetir cifrados de bloques iguales.
-         * Lo que lo hace vulnerable a ataques de análisis de frecuencia y otros tipos de ataques.
+         * Resultados de test de velocidad:
+         *
+         * Fastest Encrypt: AES-128 - 385,667 ticks
+         * Slowest Encrypt: ChaCha20 - 559,208 ticks
+         * AES-128 - 385,667 ticks
+         * AES-192 - 435,458 ticks
+         * AES-256 - 468,542 ticks
+         * ChaCha20 - 559,208 ticks
+           
+         * Fastest Decrypt: ChaCha20 - 101,917 ticks
+         * Slowest Decrypt: AES-256 - 7,593,708 ticks
+         * AES-128 - 283,292 ticks
+         * AES-192 - 2,356,334 ticks
+         * AES-256 - 7,593,708 ticks
+         * ChaCha20 - 101,917 ticks
+         *
+         * DISCLAIMER: Los tiempos se tomaron ejecutando cada algoritmo uno por uno y buscando la media de los tiempos de ejecución,
+         * ya que si se ejecutan todos los algoritmos como se realiza en la función, se puede ver que el primero siempre es el más lento,
+         * mientras que los demás terminan siendo mucho más rápidos. Esto se debe a las optimizaciones que realiza el compilador de C#.
          */
     }
-    
+
+    private static void Part4(string folderPath)
+    {
+        string[] allFiles = Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories);
+        foreach (var file in allFiles)
+        {
+            Console.WriteLine($"File: {file}");
+        }
+        
+        var key = GenerateRandomKey("AES");
+        var mode = "CBC";
+
+        foreach (var file in allFiles)
+        {
+            var fileBytes = ReadBinaryFile(file);
+            File.Delete(file);
+            var encrypt = AesImplementation.Encrypt(fileBytes, key, mode);
+            
+            var encryptedFilePath = $"{file}.encrypted";
+            File.WriteAllBytes(encryptedFilePath, encrypt);
+        }
+        
+        File.WriteAllBytes($"{folderPath}/encryptionKey.key", key);
+    }
+
     private static void Main(string[] args)
     {
-        Part1();
+        // Part1();
+        // Part3();
+        Part4("./folderExampleEncrypted");
     }
 }
