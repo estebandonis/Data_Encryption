@@ -274,8 +274,8 @@ class Program
 
     private static void Main(string[] args)
     {
-        // Part1();
-        // Part3();
+        Part1();
+        Part3();
         Part4("./folderExampleEncrypted");
     }
 }
