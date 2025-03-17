@@ -2,7 +2,7 @@
 PROJECT NAME
 -->
 
-# Ejercicio Stream Cipher
+# Ejercicio Block Cipher
 <a id="readme-top"></a>
 
 <!--

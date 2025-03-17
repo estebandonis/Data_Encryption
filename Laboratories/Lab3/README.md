@@ -2,7 +2,7 @@
 PROJECT NAME
 -->
 
-# Ejercicio Stream Cipher
+# Laboratorio 3
 <a id="readme-top"></a>
 
 <!--
@@ -10,7 +10,7 @@ PROJECT DESCRIPTION
 -->
 ## 📜 Descripción
 
-En este archivo se encuentra ubicado el ejercicio block cipher, en la cual realizamos la encriptación y descencriptación de texto e imágenes utilizando los algoritmos DES, 3DES Y AES.
+En este archivo se encuentra ubicado el laboratorio 3, en la cual realizamos la encriptación y descencriptación de archivos utilizando los algoritmos AES y CHACHA20.
 
 ## 📖 Repositorio
 * https://github.com/estebandonis/Data_Encryption.git
